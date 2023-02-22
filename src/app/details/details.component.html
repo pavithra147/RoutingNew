@@ -1,0 +1,43 @@
+<div class="container border my-5 ">
+<form [formGroup]="formDetails" (ngSubmit)="onSubmit()" >
+    <div class=" my-2 px-5">
+        <label>Name</label>
+        <input class="form-control" type="text" formControlName="name" >
+    </div>
+    <div *ngIf="formDetails.get('name')?.touched && formDetails.get('name')?.invalid" class="text-danger">
+        <small *ngIf="formDetails.get('name')?.errors?.['required']">Name is required</small>
+    </div>
+    <div class=" my-2 px-5">
+        <label>Age</label>
+        <input class="form-control" type="text" formControlName="age">
+    </div>
+    <div *ngIf="formDetails.get('age')?.touched && formDetails.get('age')?.invalid" class="text-danger">
+        <small *ngIf="formDetails.get('age')?.errors?.['required']">Age is required</small>
+    </div>
+    <div class=" my-2 px-5">
+        <label>Address</label>
+        <input class="form-control" type="text" formControlName="address">
+    </div>
+    <div *ngIf="formDetails.get('address')?.touched && formDetails.get('address')?.invalid" class="text-danger">
+        <small *ngIf="formDetails.get('address')?.errors?.['required']">Address is required</small>
+    </div>
+    <div class="my-2 px-5">
+        <label>Phone No</label>
+        <input class="form-control" type="tel" formControlName="phoneNo">
+    </div>
+    <div *ngIf="formDetails.get('phoneNo')?.touched && formDetails.get('phoneNo')?.invalid" class="text-danger">
+        <small *ngIf="formDetails.get('phoneNo')?.errors?.['required']">Phone Number is required</small>
+    </div>
+    <div class="my-2 px-5">
+        <label>Location</label>
+        <input class="form-control" type="text" formControlName="location">
+    </div>
+    <div *ngIf="formDetails.get('location')?.touched && formDetails.get('location')?.invalid" class="text-danger">
+        <small *ngIf="formDetails.get('name')?.errors?.['required']">Location is required</small>
+    </div>
+    <div class="my-2">
+    <button type="submit"class="btn btn-primary"  (click)="onSubmit()" >Submit</button>
+</div>
+</form>
+</div>
+
