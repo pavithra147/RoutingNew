@@ -6,7 +6,7 @@ import { DisplayComponent } from './display/display.component';
 const routes: Routes = [
   {path:'',redirectTo:'details',pathMatch:'full'},
   {path:'details',component:DetailsComponent},
-  {path:'display/:name/:age/:address/:phoneNo/:location',component:DisplayComponent}
+  {path:'display',component:DisplayComponent}
 ];
 
 @NgModule({

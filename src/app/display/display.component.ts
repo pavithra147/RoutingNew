@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { SharedService } from '../shared.service';
 
 @Component({
@@ -13,27 +14,47 @@ export class DisplayComponent implements OnInit {
    public address!:string;
    public phoneNo!:string;
    public location!:string;
-  
-  constructor(private route:ActivatedRoute,private sharedService:SharedService) {
-    // this.sharedService.obs$.subscribe((x)=>{
-    //    this.name=JSON.stringify(x.name);
-    //    this.age=JSON.stringify(x.age);
-    //    this.address=JSON.stringify(x.address);
-    //    this.phoneNo=JSON.stringify(x.phoneNo);
-    //    this.location=JSON.stringify(x.location);
-    // })
+   public value!:any;
+   formData:any={}
+  constructor(private route:ActivatedRoute,private sharedService:SharedService,private router:Router) {
+   
    }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params=>{
-      this.name=params['name'];
-      this.age=params['age'];
-      this.address=params['address'];
-      this.phoneNo=params['phoneNo'];
-      this.location=params['location'];
+    // this.route.params.subscribe(params=>{
+    //   this.name=params['name'];
+    //   this.age=params['age'];
+    //   this.address=params['address'];
+    //   this.phoneNo=params['phoneNo'];
+    //   this.location=params['location'];
      
       
-    })
+    // })
+    this.details();
+   
   }
 
-}
+  details(){
+    this.sharedService.obs$.subscribe((x)=>{
+      this.value=x
+      console.log(this.value);
+   })
+  }
+  
+  delete(){
+    this.value=[];
+
+    }
+    
+    edit(){
+     
+      this.sharedService.get(this.value);
+      
+      this.router.navigate(['/details'])
+    
+     
+      
+    }
+  }
+
+

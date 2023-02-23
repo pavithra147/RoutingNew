@@ -2,7 +2,7 @@
 <form [formGroup]="formDetails" (ngSubmit)="onSubmit()" >
     <div class=" my-2 px-5">
         <label>Name</label>
-        <input class="form-control" type="text" formControlName="name" >
+        <input class="form-control" type="text" formControlName="name"  >
     </div>
     <div *ngIf="formDetails.get('name')?.touched && formDetails.get('name')?.invalid" class="text-danger">
         <small *ngIf="formDetails.get('name')?.errors?.['required']">Name is required</small>
@@ -36,7 +36,8 @@
         <small *ngIf="formDetails.get('name')?.errors?.['required']">Location is required</small>
     </div>
     <div class="my-2">
-    <button type="submit"class="btn btn-primary"  (click)="onSubmit()" >Submit</button>
+    <button type="submit"class="btn btn-primary">Submit</button>
+    <button type="button" >check</button>
 </div>
 </form>
 </div>
