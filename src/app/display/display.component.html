@@ -1,41 +1,11 @@
-<h1>User Details</h1>
-<!-- <ul class="container border my-3"  *ngFor="let item of value">
-<li>Name: {{item.name}}</li>
-<li>Age: {{item.age}}</li>
-<li>Address: {{item.address}}</li>
-<li>phoneNo: {{item.phoneNo}}</li>
-<li>location: {{item.location}}</li>
-</ul> -->
+<h1>User Details</h1>   
+<button class="btn btn-primary" routerLink="/details">ADD</button>
 
-<table class="table table-responsive">
-    <thead>
-        <tr >
-            <th>S.No</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Address</th>
-            <th>PhoneNo</th>
-            <th>Location</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr  *ngFor="let item of value;let i=index" >
-            <td>{{i+1}}</td>
-            <td>{{item.name}}</td>
-            <td>{{item.age}}</td>
-            <td>{{item.address}}</td>
-            <td>{{item.phoneNo}}</td>
-            <td>{{item.location}}</td>
-            <button (click)="delete()"><i class="fas fa-trash"></i></button>&nbsp; <button (click)="edit()"><i class="fas fa-pen"></i></button>
-        </tr>
-    </tbody>
-</table>
+<div class="row">
+   <div class="col-md-12"></div>
+        <app-table  [head]="headingArray" [body]="value" (delete)="delete($event)" (edit)="edit($event)" ></app-table>
+    </div>       
 
 
-<!-- <td>{{i+1}}</td>
-<td>{{name}}</td>
-<td>{{age}}</td>
-<td>{{address}}</td>
-<td>{{phoneNo}}</td>
-<td>{{location}}</td> -->
+
+

@@ -7,12 +7,14 @@ import { DetailsComponent } from './details/details.component';
 import { DisplayComponent } from './display/display.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TableComponent } from './details/table/table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DetailsComponent,
-    DisplayComponent
+    DisplayComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,

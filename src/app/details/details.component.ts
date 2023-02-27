@@ -18,8 +18,7 @@ export class DetailsComponent implements OnInit {
    }
    public name!:string;
    public age!:string;
-   public userDetails:any;
-   public formData:any ={};
+ 
   
    ngOnInit(): void {
     this.form();
@@ -37,7 +36,7 @@ export class DetailsComponent implements OnInit {
   onSubmit(){
     if(this.formDetails.valid){
       this.submit=true;
-      this.userDetails=[];
+     
       let values={
        name:this.formDetails.get('name')?.value,
        age:this.formDetails.get('age')?.value,
@@ -45,12 +44,10 @@ export class DetailsComponent implements OnInit {
        phoneNo:this.formDetails.get('phoneNo')?.value,
        location:this.formDetails.get('location')?.value
       }
-      this.userDetails.push(values);
-      console.log(this.userDetails);
+      console.log(values)
+     
+     this.sharedService.sendData(values);
       
-      alert("Your details are Submitted");
-      this.sharedService.sendData(this.userDetails);
-      console.log(this.sharedService.sendData(this.userDetails));
       
       this.router.navigate(['/display']);
      }
@@ -58,25 +55,22 @@ export class DetailsComponent implements OnInit {
       alert("Please fill all the details")
      }
   }
-  // setValue(){
-  //   this.formDetails.setValue({
-  //     name:this.formDetails.get('name')?.value,
-  //     age:this.formDetails.get('age')?.value,
-  //     address:this.formDetails.get('address')?.value,
-  //     phoneNo:this.formDetails.get('phoneNo')?.value,
-  //     location:this.formDetails.get('location')?.value
-  //   })
-  //   this.sharedService.obser$.subscribe((x)=>{
-      
-  //     this.collection=JSON.stringify(x);
-  //     console.log(this.collection);
+  public value:any;
+  setValue(){
+  this.sharedService.obs$.subscribe((x)=>{
+  this.value=x;
+  this.formDetails.patchValue({
+    name:this.value.name,
+    age:this.value.age,
+    address:this.value.address,
+    phoneNo:this.value.phoneNo,
+    location:this.value.location
+  })
+  console.log(this.formDetails)
+  })
     
-
-  //   });
-  // }
-  public collection!:any;
-    
-   
+  }
+ 
   }
 
 

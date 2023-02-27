@@ -10,6 +10,7 @@ export class SharedService {
    private sub:BehaviorSubject<string>
    public obser$:Observable<any>
    public formData:any={}
+   public array:any=[];
   constructor() {
     this.subject=new BehaviorSubject<string>('');
     this.obs$=this.subject.asObservable();
@@ -17,13 +18,16 @@ export class SharedService {
     this.obser$=this.subject.asObservable();
    }
 
-   sendData(data:string){
-     this.subject.next(data);
+   sendData(data:any){
+    this.array.push(data);
+    console.log(this.array)
+      this.subject.next(this.array);
 
    }
-  get(res:string){
-    this.sub.next(res);
-  }
+  // get(){
+  //   // this.sub.next(res);
+  //   return this.array
+  // }
 
  
 }

@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 import { SharedService } from '../shared.service';
 
 @Component({
@@ -15,7 +15,10 @@ export class DisplayComponent implements OnInit {
    public phoneNo!:string;
    public location!:string;
    public value!:any;
-   formData:any={}
+   
+   public headingArray=['S.No','Name','Age','Address','PhoneNo','Location','Action'];
+  
+  @ViewChild('form') forms!:NgForm;
   constructor(private route:ActivatedRoute,private sharedService:SharedService,private router:Router) {
    
    }
@@ -36,25 +39,37 @@ export class DisplayComponent implements OnInit {
 
   details(){
     this.sharedService.obs$.subscribe((x)=>{
-      this.value=x
-      console.log(this.value);
-   })
+     this.value=x
+      
+     
+    })
+ 
   }
   
-  delete(){
-    this.value=[];
+  delete(item:any){
+    console.log(item);
+    console.log(this.value.index);
+    console.log(this.value[item])
+    let index:number=this.value.indexOf[item]
+    if(index !== -1){
+      this.value.splice(index,1);
+    }
 
     }
     
-    edit(){
-     
-      this.sharedService.get(this.value);
+    edit(data:any){
+      console.log(data);
+      // this.sharedService.get(this.value);
       
       this.router.navigate(['/details'])
+     //this.forms.setValue(data);
     
-     
+    
       
     }
+  
+   
+   
   }
 
 

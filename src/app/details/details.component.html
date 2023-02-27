@@ -1,5 +1,5 @@
 <div class="container border my-5 ">
-<form [formGroup]="formDetails" (ngSubmit)="onSubmit()" >
+<form [formGroup]="formDetails" #form="ngForm"(ngSubmit)="onSubmit()" >
     <div class=" my-2 px-5">
         <label>Name</label>
         <input class="form-control" type="text" formControlName="name"  >
@@ -37,7 +37,8 @@
     </div>
     <div class="my-2">
     <button type="submit"class="btn btn-primary">Submit</button>
-    <button type="button" >check</button>
+    <button type="button" (click)="setValue()">check</button>
+
 </div>
 </form>
 </div>
