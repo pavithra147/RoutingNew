@@ -9,7 +9,7 @@
     </div>
     <div class=" my-2 px-5">
         <label>Age</label>
-        <input class="form-control" type="text" formControlName="age">
+        <input class="form-control" type="text" formControlName="age" >
     </div>
     <div *ngIf="formDetails.get('age')?.touched && formDetails.get('age')?.invalid" class="text-danger">
         <small *ngIf="formDetails.get('age')?.errors?.['required']">Age is required</small>
@@ -37,8 +37,6 @@
     </div>
     <div class="my-2">
     <button type="submit"class="btn btn-primary">Submit</button>
-    <button type="button" (click)="setValue()">check</button>
-
 </div>
 </form>
 </div>

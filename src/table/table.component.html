@@ -14,8 +14,8 @@
            <td> {{item.address}}</td>
             <td>{{item.phoneNo}}</td>
             <td>{{item.location}}</td>
-           <button (click)="deleted(item)"><i class="fas fa-trash" ></i></button>&nbsp; 
-          <button (click)="editable(item)"><i class="fas fa-pen"></i></button> 
+           <button (click)="deleted(item.id)"><i class="fas fa-trash" ></i></button>&nbsp; 
+          <button (click)="editable(item.id)"><i class="fas fa-pen"></i></button> 
       </tr>
   </tbody>
 </table>

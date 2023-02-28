@@ -4,10 +4,12 @@ import { DetailsComponent } from './details/details.component';
 import { DisplayComponent } from './display/display.component';
 
 const routes: Routes = [
-  {path:'',redirectTo:'details',pathMatch:'full'},
+  {path:'',redirectTo:'display',pathMatch:'full'},
   {path:'details',component:DetailsComponent},
+  {path:'detail/:data',component:DetailsComponent},
   {path:'display',component:DisplayComponent}
-];
+]
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

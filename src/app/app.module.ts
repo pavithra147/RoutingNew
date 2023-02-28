@@ -7,8 +7,8 @@ import { DetailsComponent } from './details/details.component';
 import { DisplayComponent } from './display/display.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TableComponent } from './details/table/table.component';
-
+import { TableComponent } from '../table/table.component';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +20,8 @@ import { TableComponent } from './details/table/table.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

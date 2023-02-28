@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,22 +7,33 @@ import { SharedService } from '../shared.service';
 @Component({
   selector: 'app-display',
   templateUrl: './display.component.html',
-  styleUrls: ['./display.component.css']
+  styleUrls: ['./display.component.css'],
 })
 export class DisplayComponent implements OnInit {
-   public name!:string;
-   public age!:string;
-   public address!:string;
-   public phoneNo!:string;
-   public location!:string;
-   public value!:any;
-   
-   public headingArray=['S.No','Name','Age','Address','PhoneNo','Location','Action'];
-  
-  @ViewChild('form') forms!:NgForm;
-  constructor(private route:ActivatedRoute,private sharedService:SharedService,private router:Router) {
-   
-   }
+  public name!: string;
+  public age!: string;
+  public address!: string;
+  public phoneNo!: string;
+  public location!: string;
+  public value!: any;
+
+  public headingArray = [
+    'S.No',
+    'Name',
+    'Age',
+    'Address',
+    'PhoneNo',
+    'Location',
+    'Action',
+  ];
+
+ 
+  constructor(
+    private route: ActivatedRoute,
+    private sharedService: SharedService,
+    private router: Router,
+    private http:HttpClient
+  ) {}
 
   ngOnInit(): void {
     // this.route.params.subscribe(params=>{
@@ -30,46 +42,40 @@ export class DisplayComponent implements OnInit {
     //   this.address=params['address'];
     //   this.phoneNo=params['phoneNo'];
     //   this.location=params['location'];
-     
-      
+
     // })
     this.details();
-   
+    
   }
 
-  details(){
-    this.sharedService.obs$.subscribe((x)=>{
-     this.value=x
-      
-     
+  details() {
+    // this.sharedService.obs$.subscribe((x) => {
+    //   this.value = x;
+    // });
+    this.sharedService.getDetails().subscribe(x=>{
+      this.value=x;
     })
+  }
+
+ // delete(item: any) {
+    // let index: number = this.value.indexOf[item];
+    // if (index !== -1) {
+    //   this.value.splice(index, 1);
+    // }}
+ delete(id:any){
  
-  }
-  
-  delete(item:any){
-    console.log(item);
-    console.log(this.value.index);
-    console.log(this.value[item])
-    let index:number=this.value.indexOf[item]
-    if(index !== -1){
-      this.value.splice(index,1);
-    }
-
-    }
-    
-    edit(data:any){
-      console.log(data);
-      // this.sharedService.get(this.value);
-      
-      this.router.navigate(['/details'])
-     //this.forms.setValue(data);
-    
-    
-      
-    }
-  
-   
-   
+    this.sharedService.delete(id).subscribe();
+    this.details();
   }
 
-
+  edit(data: any) {
+    
+    this.sharedService.edit(data);
+  
+    this.router.navigate(['/detail',data])
+  }
+  add() {
+    this.sharedService.add();
+    this.router.navigate(['/details']);
+  }
+}

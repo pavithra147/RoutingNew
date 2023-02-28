@@ -1,10 +1,10 @@
 <h1>User Details</h1>   
-<button class="btn btn-primary" routerLink="/details">ADD</button>
+<button class="btn btn-primary" (click)="add()">ADD</button>
 
 <div class="row">
    <div class="col-md-12"></div>
         <app-table  [head]="headingArray" [body]="value" (delete)="delete($event)" (edit)="edit($event)" ></app-table>
-    </div>       
+    </div>   
 
 
 
