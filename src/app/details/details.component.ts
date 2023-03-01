@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, SelectControlValueAccessor, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../shared.service';
 import { User, UserFormGroup } from './user';
@@ -13,50 +16,25 @@ import { User, UserFormGroup } from './user';
 export class DetailsComponent implements OnInit {
   public formDetails!: UserFormGroup;
   public submit = false;
- public values:any;
- public item!:any;
+  public values: any;
+  public finalOut: any;
+  public formdata: any;
+ public item:any;
+  public out!: any;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private sharedService: SharedService,
-    private route:ActivatedRoute,
-    private http:HttpClient
+    private route: ActivatedRoute,
+    private http: HttpClient
   ) {}
 
   public num: any;
   ngOnInit(): void {
     this.form();
-    if (this.sharedService.table == false) {
-      this.route.params.subscribe((params)=>{
-         this.num=params['data'];
-         console.log(this.num);
-        })
-        //this.num = this.sharedService.index;
-         this.sharedService.detailsToEdit(this.num).subscribe((x)=>{this.values=x;
-          console.log(this.values[this.num])
-       
-        });
-      //  this.values= this.sharedService.get();
-      //  console.log(this.values);
-      //  this.values = this.values[this.num];
-     
-    
-
-    
-      this.formDetails.setValue({
-        name: this.values.name,
-        age: this.values.age,
-        address: this.values.address,
-        phoneNo: this.values.phoneNo,
-        location: this.values.location,
-      });
-    
-    }
-    
+    this.idFromUrl();
+    this.getFromServer();
   }
-
-
- 
 
   form() {
     this.formDetails = this.formBuilder.group({
@@ -67,31 +45,76 @@ export class DetailsComponent implements OnInit {
       location: ['', [Validators.required]],
     }) as UserFormGroup;
 
-    // if (this.sharedService.table == false) {
-    //   this.route.params.subscribe((params)=>{
-    //      this.num=params['data'];
-    //      console.log(this.num);
-    //     })
-    //     // this.num = this.sharedService.index;
-    //      this.sharedService.getDetails().subscribe(x=>{this.values=x;
-    //       console.log(this.values);
-    //     //   this.item = this.values[this.num];
-    //     // console.log(this.item);
-    //     });
-        
-    // //    this.values = this.values[this.num.data];
+    if (this.sharedService.table == false) {
+      this.route.params.subscribe((params) => {
+        this.num = params['data'];
+      });
+      // this.num = this.sharedService.index;
+      this.sharedService.getDetails().subscribe((x) => {
+        this.values = x;
+        this.finalOut = this.values.filter((a: any) => {
+          if (a.id == this.num) return a;
+        });
+       
+        this.formdata = this.finalOut.map((a: any) => {
+          this.out = a;
+          console.log(this.out);
+
+          return a.name;
+        });
+
+        this.formDetails.patchValue({
+          name: this.out.name,
+          age: this.out.age,
+          address: this.out.address,
+          phoneNo: this.out.phoneNo,
+          location: this.out.location,
+        });
+      });
+
      
-    // //  console.log(this.values);
-    // if(this.num===this.values.id)
-    //   this.formDetails.patchValue({
-    //     name: this.values[this.num].name,
-    //     age: this.values[this.num].age,
-    //     address: this.values[this.num].address,
-    //     phoneNo: this.values[this.num].phoneNo,
-    //     location: this.values[this.num].location,
-    //   });
-    // }
+      //   this.item = this.values[this.num];
+      // console.log(this.item);
+
+      //    this.values = this.values[this.num.data];
+
+      //  console.log(this.values);
+
+      // this.formDetails.patchValue({
+      //   name: this.values.name,
+      //   age: this.values.age,
+      //   address: this.values.address,
+      //   phoneNo: this.values.phoneNo,
+      //   location: this.values.location,
+      // });
+     }
+     
+
   }
+
+  idFromUrl(){
+    this.route.params.subscribe((params) => {
+      this.num = params['data'];
+      console.log(this.num)
+    });
+  }
+
+  getFromServer(){
+    this.sharedService.getDetails().subscribe((x) => {
+      this.values = x;
+      console.log(this.values)
+
+    })
+  }
+
+  editByCheck(){
+    this.sharedService.getDetails().subscribe((x) => {
+      this.item = x;
+      console.log("kjh",this.item)
+
+    })
+    }
+
   onSubmit() {
     if (this.formDetails.valid) {
       this.submit = true;
@@ -103,12 +126,18 @@ export class DetailsComponent implements OnInit {
         location: this.formDetails.get('location')?.value,
       };
 
-      if (this.sharedService.table == false) {
-        this.sharedService.editData(this.num.data, values);
-      } else {
-        this.sharedService.sendData(values);
-         this.sharedService.postDetails(values).subscribe();
-      }
+       if (this.sharedService.table == false) {
+      //   this.sharedService.editData(this.num, this.out);
+     
+        this.out = values;
+        this.sharedService.put(this.num, this.out).subscribe();
+     
+       } 
+      else {
+        // this.sharedService.sendData(values);
+        this.sharedService.postDetails(values).subscribe();
+      
+     }
       this.router.navigate(['/display']);
     } else {
       alert('Please fill all the details');

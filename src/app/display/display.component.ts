@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../shared.service';
 
@@ -16,7 +17,8 @@ export class DisplayComponent implements OnInit {
   public phoneNo!: string;
   public location!: string;
   public value!: any;
-
+ 
+ 
   public headingArray = [
     'S.No',
     'Name',
@@ -27,12 +29,13 @@ export class DisplayComponent implements OnInit {
     'Action',
   ];
 
+
  
   constructor(
     private route: ActivatedRoute,
     private sharedService: SharedService,
     private router: Router,
-    private http:HttpClient
+    private http:HttpClient,
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +57,7 @@ export class DisplayComponent implements OnInit {
     // });
     this.sharedService.getDetails().subscribe(x=>{
       this.value=x;
+     // this.value.paginator=this.paginator;
     })
   }
 
@@ -75,7 +79,10 @@ export class DisplayComponent implements OnInit {
     this.router.navigate(['/detail',data])
   }
   add() {
-    this.sharedService.add();
+   this.sharedService.add();
     this.router.navigate(['/details']);
   }
+
+ 
+  
 }

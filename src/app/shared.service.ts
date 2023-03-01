@@ -30,6 +30,7 @@ export class SharedService {
   }
   editData(index: any, data: any) {
     this.array[index] = data;
+    
   }
   get() {
     return this.array;
@@ -54,5 +55,8 @@ export class SharedService {
   }
   detailsToEdit(val:any){
     return this.http.get('http://localhost:3000/details',val)
+  }
+  put(id:any,value:any){
+    return this.http.put(`http://localhost:3000/details/${id}`,value);
   }
 }
