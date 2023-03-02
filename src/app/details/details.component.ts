@@ -1,9 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../shared.service';
 import { User, UserFormGroup } from './user';
@@ -19,101 +15,64 @@ export class DetailsComponent implements OnInit {
   public values: any;
   public finalOut: any;
   public formdata: any;
- public item:any;
+  public item: any;
   public out!: any;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private sharedService: SharedService,
-    private route: ActivatedRoute,
-    private http: HttpClient
+    private route: ActivatedRoute
   ) {}
 
   public num: any;
   ngOnInit(): void {
     this.form();
-    this.idFromUrl();
-    this.getFromServer();
   }
 
   form() {
     this.formDetails = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      age: ['', [Validators.required]],
+      name: ['', [Validators.required,Validators.pattern('^[A-Za-z].{6,20}')]],
+      age: ['', [Validators.required,Validators.pattern('^[1-9].{1}')]],
       address: ['', [Validators.required]],
-      phoneNo: ['', [Validators.required]],
+      phoneNo: ['', [Validators.required,Validators.pattern('^[6-9].{0,9}')]],
       location: ['', [Validators.required]],
     }) as UserFormGroup;
 
-    if (this.sharedService.table == false) {
-      this.route.params.subscribe((params) => {
-        this.num = params['data'];
-      });
-      // this.num = this.sharedService.index;
-      this.sharedService.getDetails().subscribe((x) => {
-        this.values = x;
-        this.finalOut = this.values.filter((a: any) => {
-          if (a.id == this.num) return a;
-        });
-       
-        this.formdata = this.finalOut.map((a: any) => {
-          this.out = a;
-          console.log(this.out);
-
-          return a.name;
-        });
-
-        this.formDetails.patchValue({
-          name: this.out.name,
-          age: this.out.age,
-          address: this.out.address,
-          phoneNo: this.out.phoneNo,
-          location: this.out.location,
-        });
-      });
-
-     
-      //   this.item = this.values[this.num];
-      // console.log(this.item);
-
-      //    this.values = this.values[this.num.data];
-
-      //  console.log(this.values);
-
-      // this.formDetails.patchValue({
-      //   name: this.values.name,
-      //   age: this.values.age,
-      //   address: this.values.address,
-      //   phoneNo: this.values.phoneNo,
-      //   location: this.values.location,
-      // });
-     }
-     
-
+    this.idFromUrl();
   }
 
-  idFromUrl(){
+  idFromUrl() {
     this.route.params.subscribe((params) => {
       this.num = params['data'];
-      console.log(this.num)
+      console.log("navigation",this.num);
     });
+    if (this.num != undefined) {
+      this.editByCheck();
+    }
   }
 
-  getFromServer(){
-    this.sharedService.getDetails().subscribe((x) => {
-      this.values = x;
-      console.log(this.values)
-
-    })
-  }
-
-  editByCheck(){
+  editByCheck() {
     this.sharedService.getDetails().subscribe((x) => {
       this.item = x;
-      console.log("kjh",this.item)
+      this.item = this.item.filter((a: any) => {
+        if (a.id == this.num) {
+          return a;
+        }
+      });
+      this.formdata = this.item.map((a: any) => {
+        this.out = a;
+        return a;
+      });
 
-    })
-    }
+      this.formDetails.patchValue({
+        name: this.out.name,
+        age: this.out.age,
+        address: this.out.address,
+        phoneNo: this.out.phoneNo,
+        location: this.out.location,
+      });
+    });
+  }
 
   onSubmit() {
     if (this.formDetails.valid) {
@@ -126,21 +85,40 @@ export class DetailsComponent implements OnInit {
         location: this.formDetails.get('location')?.value,
       };
 
-       if (this.sharedService.table == false) {
-      //   this.sharedService.editData(this.num, this.out);
+      this.out = values;
+      if (this.num != null) {
+        this.sharedService.put(this.num, this.out).subscribe({
+          next:(value:any)=>{},
+          error:(error:any)=>{alert("something went wrong")}
+        });
+        this.router.navigate(['/display']);
+      }
+      else{
+        this.sharedService.postDetails(values).subscribe( {
+          next:(valu:any)=>{},
+          error:(error:any)=>{alert("something went wrong")}
+          
+        });
+        this.router.navigate(['/display']);
+      }
+
      
-        this.out = values;
-        this.sharedService.put(this.num, this.out).subscribe();
-     
-       } 
-      else {
-        // this.sharedService.sendData(values);
-        this.sharedService.postDetails(values).subscribe();
-      
-     }
-      this.router.navigate(['/display']);
     } else {
       alert('Please fill all the details');
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

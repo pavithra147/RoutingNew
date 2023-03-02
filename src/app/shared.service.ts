@@ -15,48 +15,39 @@ export class SharedService {
   public array: any = [];
   public index: any;
   public table = true;
-  constructor(private http:HttpClient) {
+  constructor(private http: HttpClient) {
     this.subject = new BehaviorSubject<string>('');
     this.obs$ = this.subject.asObservable();
     this.sub = new BehaviorSubject<string>('');
     this.obser$ = this.subject.asObservable();
-
   }
 
   sendData(data: any) {
     this.array.push(data);
     this.subject.next(this.array);
-
   }
   editData(index: any, data: any) {
     this.array[index] = data;
-    
   }
   get() {
     return this.array;
   }
   edit(data: any) {
-    this.table = false;
     this.index = data;
   }
-  add() {
-    this.table = true;
+  delete(item: any) {
+    return this.http.delete(`http://localhost:3000/details/${item}`);
   }
-
-  delete(item:any){
-    return this.http.delete(`http://localhost:3000/details/${item}`)
+  postDetails(form: any) {
+    return this.http.post('http://localhost:3000/details', form);
   }
-  postDetails(form:any){
-    return this.http.post('http://localhost:3000/details',form);
+  getDetails() {
+    return this.http.get('http://localhost:3000/details');
   }
-  getDetails(){
-    return this.http.get('http://localhost:3000/details')
-   
+  detailsToEdit(val: any) {
+    return this.http.get('http://localhost:3000/details', val);
   }
-  detailsToEdit(val:any){
-    return this.http.get('http://localhost:3000/details',val)
-  }
-  put(id:any,value:any){
-    return this.http.put(`http://localhost:3000/details/${id}`,value);
+  put(id: any, value: any) {
+    return this.http.put(`http://localhost:3000/details/${id}`, value);
   }
 }

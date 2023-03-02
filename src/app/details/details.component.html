@@ -1,13 +1,14 @@
 
 
 <div class="container border my-5 ">
-<form [formGroup]="formDetails" #form="ngForm"(ngSubmit)="onSubmit()">
+<form [formGroup]="formDetails" (ngSubmit)="onSubmit()">
     <div class=" my-2 px-5">
         <label>Name</label>
         <input class="form-control" type="text" formControlName="name"  >
     </div>
     <div *ngIf="formDetails.get('name')?.touched && formDetails.get('name')?.invalid" class="text-danger">
         <small *ngIf="formDetails.get('name')?.errors?.['required']">Name is required</small>
+        <small *ngIf="formDetails.get('name')?.errors?.['pattern']">Fill the name in correct format</small>
     </div>
     <div class=" my-2 px-5">
         <label>Age</label>
@@ -15,6 +16,7 @@
     </div>
     <div *ngIf="formDetails.get('age')?.touched && formDetails.get('age')?.invalid" class="text-danger">
         <small *ngIf="formDetails.get('age')?.errors?.['required']">Age is required</small>
+        <small *ngIf="formDetails.get('age')?.errors?.['pattern']">Fill the age in correct format</small>
     </div>
     <div class=" my-2 px-5">
         <label>Address</label>
@@ -25,7 +27,8 @@
     </div>
     <div class="my-2 px-5">
         <label>Phone No</label>
-        <input class="form-control" type="tel" formControlName="phoneNo">
+        <input class="form-control" type="tel" formControlName="phoneNo" >
+        <small class="text-danger" *ngIf="formDetails.get('phoneNo')?.errors?.['pattern']">Fill the Phone number in correct format</small>
     </div>
     <div *ngIf="formDetails.get('phoneNo')?.touched && formDetails.get('phoneNo')?.invalid" class="text-danger">
         <small *ngIf="formDetails.get('phoneNo')?.errors?.['required']">Phone Number is required</small>
@@ -42,4 +45,3 @@
 </div>
 </form>
 </div>
-

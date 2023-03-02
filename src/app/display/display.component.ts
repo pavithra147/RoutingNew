@@ -1,8 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SharedService } from '../shared.service';
 
 @Component({
@@ -17,8 +14,7 @@ export class DisplayComponent implements OnInit {
   public phoneNo!: string;
   public location!: string;
   public value!: any;
- 
- 
+
   public headingArray = [
     'S.No',
     'Name',
@@ -29,60 +25,32 @@ export class DisplayComponent implements OnInit {
     'Action',
   ];
 
+  constructor(private sharedService: SharedService, private router: Router) {}
 
- 
-  constructor(
-    private route: ActivatedRoute,
-    private sharedService: SharedService,
-    private router: Router,
-    private http:HttpClient,
-  ) {}
-
-  ngOnInit(): void {
-    // this.route.params.subscribe(params=>{
-    //   this.name=params['name'];
-    //   this.age=params['age'];
-    //   this.address=params['address'];
-    //   this.phoneNo=params['phoneNo'];
-    //   this.location=params['location'];
-
-    // })
+  ngOnInit() {
     this.details();
-    
   }
 
   details() {
-    // this.sharedService.obs$.subscribe((x) => {
-    //   this.value = x;
-    // });
-    this.sharedService.getDetails().subscribe(x=>{
-      this.value=x;
-     // this.value.paginator=this.paginator;
-    })
+    this.sharedService.getDetails().subscribe({
+     next:(x:any)=> {this.value = x},
+     error:(error:any)=>{alert("something went wrong")}
+    });
   }
-
- // delete(item: any) {
-    // let index: number = this.value.indexOf[item];
-    // if (index !== -1) {
-    //   this.value.splice(index, 1);
-    // }}
- delete(id:any){
- 
-    this.sharedService.delete(id).subscribe();
+  delete(id: any) {
+    this.sharedService.delete(id).subscribe({
+      next:(x:any)=>{},
+      error:(error:any)=>{alert("something went wrong")}
+    });
     this.details();
   }
 
   edit(data: any) {
-    
     this.sharedService.edit(data);
-  
-    this.router.navigate(['/detail',data])
+
+    this.router.navigate(['/detail', data]);
   }
   add() {
-   this.sharedService.add();
     this.router.navigate(['/details']);
   }
-
- 
-  
 }

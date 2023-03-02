@@ -1,92 +1,44 @@
 {
   "details": [
     {
-      "name": "lkjhgcvbnm,.098765",
-      "age": "20",
-      "address": "fdyuiikujhgfcvgbhjk,jhgfd",
-      "phoneNo": "lkijhgb",
-      "location": "lkjhg",
+      "name": "Revathi",
+      "age": "24",
+      "address": "12,Nehru Street",
+      "phoneNo": "9879087987",
+      "location": "coimbatore",
       "id": 2
     },
     {
-      "name": "lkijuh",
-      "age": "lkjhghjk",
-      "address": ",mnbnm",
-      "phoneNo": "jhjk",
-      "location": "chennai",
-      "id": 4
-    },
-    {
-      "name": "';lkjhghm",
-      "age": "lkjhgbnm",
-      "address": "ijhmk,l",
-      "phoneNo": "876456785678",
-      "location": "kjhghnjm",
-      "id": 5
-    },
-    {
-      "name": "lkjh",
-      "age": "kjh",
-      "address": "lkjhbg",
-      "phoneNo": "kjhgbv",
-      "location": "kjhghj",
+      "name": "Merlins",
+      "age": "20",
+      "address": "1,596 MGR  Nagar",
+      "phoneNo": "6789879987",
+      "location": "Hosur",
       "id": 6
     },
     {
-      "name": "hg",
-      "age": "oiujyhg",
-      "address": "lkjhg",
-      "phoneNo": ";lkjh",
-      "location": "lkjh",
-      "id": 8
-    },
-    {
-      "name": "lkjhg",
-      "age": "k,jmhnb",
-      "address": "lkjhbv",
-      "phoneNo": "kjh",
-      "location": "lkjh",
+      "name": "Sharmila",
+      "age": "20",
+      "address": "3,Gandhi Nagar",
+      "phoneNo": "7978766566",
+      "location": "coimbatore",
       "id": 9
     },
     {
-      "name": "lkjhg",
-      "age": "kjhg",
-      "address": "jhgf",
-      "phoneNo": "jhgf",
-      "location": "jhgf",
+      "name": "Viknesh",
+      "age": "26",
+      "address": "9/A,Anna nagar",
+      "phoneNo": "8978767766",
+      "location": "Chennai",
       "id": 10
     },
     {
-      "name": "kiujyhg",
-      "age": "lkjhg",
-      "address": "lkjh",
-      "phoneNo": "lkjh",
-      "location": "5r4eedr",
+      "name": "Mahalakshmi",
+      "age": "23",
+      "address": "2, Vivekanandar Street",
+      "phoneNo": "988988777",
+      "location": "coimbatore",
       "id": 11
-    },
-    {
-      "name": "kujyhgfvbn",
-      "age": "ytdf",
-      "address": "fdfgh",
-      "phoneNo": "vcxcvb",
-      "location": "uytghyjk",
-      "id": 12
-    },
-    {
-      "name": "iuytgrfvb",
-      "age": "cvbn",
-      "address": "jhgfvcv",
-      "phoneNo": "kjhgfdc",
-      "location": "iuytr",
-      "id": 13
-    },
-    {
-      "name": "mjhgf",
-      "age": "34",
-      "address": "kjhgf",
-      "phoneNo": "7654567898",
-      "location": "lkjhgfcghjk",
-      "id": 14
     }
   ]
 }

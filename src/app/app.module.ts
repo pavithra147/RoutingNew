@@ -10,14 +10,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TableComponent } from '../table/table.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+
 @NgModule({
   declarations: [
     AppComponent,
     DetailsComponent,
     DisplayComponent,
     TableComponent
+   
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgbModule,
     HttpClientModule,
     BrowserAnimationsModule,
-   NgxPaginationModule
+   NgxPaginationModule,
+   FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
