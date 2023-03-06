@@ -2,7 +2,7 @@
   "details": [
     {
       "name": "Revathi",
-      "age": "24",
+      "age": "28",
       "address": "12,Nehru Street",
       "phoneNo": "9879087987",
       "location": "coimbatore",
@@ -17,28 +17,12 @@
       "id": 6
     },
     {
-      "name": "Sharmila",
-      "age": "20",
-      "address": "3,Gandhi Nagar",
-      "phoneNo": "7978766566",
-      "location": "coimbatore",
-      "id": 9
-    },
-    {
-      "name": "Viknesh",
-      "age": "26",
-      "address": "9/A,Anna nagar",
-      "phoneNo": "8978767766",
-      "location": "Chennai",
-      "id": 10
-    },
-    {
-      "name": "Mahalakshmi",
+      "name": "Pavithra",
       "age": "23",
-      "address": "2, Vivekanandar Street",
-      "phoneNo": "988988777",
-      "location": "coimbatore",
-      "id": 11
+      "address": "5,Vivekandar Street",
+      "phoneNo": "9898756652",
+      "location": "Chennai",
+      "id": 7
     }
   ]
 }

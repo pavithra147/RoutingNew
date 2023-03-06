@@ -39,7 +39,7 @@ export class DisplayComponent implements OnInit {
   }
   delete(id: any) {
     this.sharedService.delete(id).subscribe({
-      next:(x:any)=>{},
+      next:(x:any)=>{ this.details();},
       error:(error:any)=>{alert("something went wrong")}
     });
     this.details();

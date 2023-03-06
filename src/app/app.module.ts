@@ -12,13 +12,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
-
+import { SortPipe } from './sort.pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   declarations: [
     AppComponent,
     DetailsComponent,
     DisplayComponent,
-    TableComponent
+    TableComponent,
+    SortPipe
    
   ],
   imports: [
@@ -29,7 +31,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HttpClientModule,
     BrowserAnimationsModule,
    NgxPaginationModule,
-   FormsModule
+   FormsModule,
+   Ng2SearchPipeModule
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

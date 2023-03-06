@@ -1,30 +1,31 @@
 <div class="fonttable">
   <div>
-    <form #filterdata="ngForm" (ngSubmit)="filtering(filterdata)">
-      <input type="number" id="filter" ngModel  name="filter">
-      <button>Click</button>
-    </form>
+    <!-- <form #filterdata="ngForm" (ngSubmit)="filtering(filterdata)">
+      <input type="text" id="filter" ngModel  name="filter" placeholder="Enter Age">
+      <button>click</button>
+    </form> -->
+    <input type="text" class="form-control" placeholder="Enter age" [(ngModel)]="age">
   </div>
-  <table class="table table-responsive">
+  <table class="table table-responsive my-5">
     <thead>
       <tr>
-        <th *ngFor="let title of head">{{ title }}</th>
+        <th *ngFor="let title of head" (click)="sort(title)" class="pointer" >{{ title }}</th>
       </tr>
     </thead>
     <tbody>
       <tr
         *ngFor="
-          let item of body
-            | paginate
-              : {
-                  itemsPerPage: tableSize,
-                  currentPage: page,
-                  totalItems: count
-                };
+          let item of body | filter:age 
+          | paginate
+          : {
+              itemsPerPage: tableSize,
+              currentPage: page,
+              totalItems: count
+            };
           let i = index
         "
       >
-        <td>{{ i + 1 }}</td>
+        <td>{{ i+1 }}</td>
         <td>{{ item.name }}</td>
         <td>{{ item.age }}</td>
         <td>{{ item.address }}</td>

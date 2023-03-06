@@ -5,3 +5,6 @@
     margin:10%;
     width:500px;
 }
+.pointer{
+    cursor: pointer;
+}
