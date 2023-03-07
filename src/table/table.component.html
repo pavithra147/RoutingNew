@@ -9,7 +9,15 @@
   <table class="table table-responsive my-5">
     <thead>
       <tr>
-        <th *ngFor="let title of head" (click)="sort(title)" class="pointer" >{{ title }}</th>
+        <th *ngFor="let title of head"  class="pointer" ><i class="fal fa-sort " (click)="sort(title)"></i>{{ title }} &nbsp;&nbsp;<i class="fas fa-caret-down" (click)="toggle()" ></i>
+          <div *ngIf="show">
+            <form #filterdata="ngForm" (ngSubmit)="filtering(filterdata , title)">
+            <input type="text" class="form-control"id="filter" ngModel name="filter" >
+           </form>
+
+          </div>
+        </th>
+    
       </tr>
     </thead>
     <tbody>
@@ -25,16 +33,19 @@
           let i = index
         "
       >
+     
         <td>{{ i+1 }}</td>
-        <td>{{ item.name }}</td>
+        <td> {{ item.name }}</td>
         <td>{{ item.age }}</td>
         <td>{{ item.address }}</td>
+        
         <td>{{ item.phoneNo }}</td>
         <td>{{ item.location }}</td>
         <button (click)="deleted(item.id)"><i class="fas fa-trash"></i></button
         >&nbsp;
         <button (click)="editable(item.id)"><i class="fas fa-pen"></i></button>
       </tr>
+      
     </tbody>
   </table>
   <div class="d-flex justify-content-center">
