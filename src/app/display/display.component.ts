@@ -19,6 +19,7 @@ export class DisplayComponent implements OnInit {
     'S.No',
     'Name',
     'Age',
+    'DOB',
     'Address',
     'PhoneNo',
     'Location',

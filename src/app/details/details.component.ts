@@ -31,10 +31,11 @@ export class DetailsComponent implements OnInit {
 
   form() {
     this.formDetails = this.formBuilder.group({
-      name: ['', [Validators.required,Validators.pattern('^[A-Za-z].{6,20}')]],
+      name: ['', [Validators.required,Validators.pattern('^[A-Za-z].{5,20}')]],
       age: ['', [Validators.required,Validators.pattern('^[1-9].{1}')]],
+      dob:[ 0,[Validators.required]],
       address: ['', [Validators.required]],
-      phoneNo: ['', [Validators.required,Validators.pattern('^[6-9].{0,9}')]],
+      phoneNo: ['', [Validators.required,Validators.pattern('^[6-9].{9}')]],
       location: ['', [Validators.required]],
     }) as UserFormGroup;
 
@@ -67,6 +68,7 @@ export class DetailsComponent implements OnInit {
       this.formDetails.patchValue({
         name: this.out.name,
         age: this.out.age,
+        dob:this.out.dob,
         address: this.out.address,
         phoneNo: this.out.phoneNo,
         location: this.out.location,
@@ -80,6 +82,7 @@ export class DetailsComponent implements OnInit {
       let values = {
         name: this.formDetails.get('name')?.value,
         age: this.formDetails.get('age')?.value,
+        dob:this.formDetails.get('dob')?.value,
         address: this.formDetails.get('address')?.value,
         phoneNo: this.formDetails.get('phoneNo')?.value,
         location: this.formDetails.get('location')?.value,

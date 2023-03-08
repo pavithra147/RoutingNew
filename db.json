@@ -3,6 +3,7 @@
     {
       "name": "Revathi",
       "age": "28",
+      "dob": "1995-03-04",
       "address": "12,Nehru Street",
       "phoneNo": "9879087987",
       "location": "coimbatore",
@@ -11,6 +12,7 @@
     {
       "name": "Merlins",
       "age": "20",
+      "dob": "2002-01-11",
       "address": "1,596 MGR  Nagar",
       "phoneNo": "6789879987",
       "location": "Hosur",
@@ -19,18 +21,38 @@
     {
       "name": "Farhana",
       "age": "23",
+      "dob": "1999-09-17",
       "address": "New street near gate way school",
       "phoneNo": "9087654321",
       "location": "Chennai",
       "id": 8
     },
     {
-      "name": "test test",
-      "age": "12",
-      "address": "test test test",
+      "name": "Vasithra",
+      "age": "20",
+      "dob": "2002-06-03",
+      "address": "2,Kamarajar Street",
       "phoneNo": "9087654321",
       "location": "Salem",
       "id": 9
+    },
+    {
+      "name": "Abinaya",
+      "age": "22",
+      "dob": "2000-10-11",
+      "address": "2/A,Gandhi Street",
+      "phoneNo": "9898887888",
+      "location": "Chennai",
+      "id": 10
+    },
+    {
+      "name": "Sharmi",
+      "age": "21",
+      "dob": "2001-07-08",
+      "address": "6,Nandha Street",
+      "phoneNo": "9876787989",
+      "location": "Erode",
+      "id": 11
     }
   ]
 }

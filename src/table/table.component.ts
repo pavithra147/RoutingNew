@@ -6,6 +6,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { SharedService } from 'src/app/shared.service';
 
@@ -15,6 +16,13 @@ import { SharedService } from 'src/app/shared.service';
   styleUrls: ['./table.component.css'],
 })
 export class TableComponent implements OnInit {
+ 
+  name= new FormControl('');
+  ageNo=new FormControl('');
+  dob=new FormControl();
+  address=new FormControl('');
+  phoneNo=new FormControl('');
+  location=new FormControl('');
   @Input() head: string[] = [];
   @Input() body: any[] = [];
   public page: number = 1;
@@ -27,6 +35,10 @@ export class TableComponent implements OnInit {
   public user:any;
   public age:any;
   public show=false;
+  public collect:any[]=[];
+
+  
+
   constructor(private sharedService: SharedService) {}
 
   ngOnInit() {
@@ -36,25 +48,45 @@ export class TableComponent implements OnInit {
  
   filtering(data:any , title:any){
      title=title.toLowerCase();
-    this.user=this.body.filter((el)=>{
-      title=title;
-       return el[title] == data.value.filter;
-      }) 
-    if(this.user.length==0){
-      return this.body=this.source;
-    }
+     this.collect.push(data.value.filter);
+    // this.user=this.body.filter((el)=>{
+    //   title=title;
+    //    return el[title] == data.value.filter;
+    //   }) 
+    //   console.log(data.value);
+      
+    // if(this.user.length==0){
+    //   return this.body=this.source;
+    // }
    
-    else{
-      return this.body=this.user;
-    }
+    // else{
+    //   return this.body=this.user;
+    // }
+     console.log(this.collect);
+     
+    this.collect.forEach((name:any,index)=>{
+      if(name){
+        console.log(index);
+        
+        this.body=this.body.filter((item)=>{
+          console.log(item[title]);
+          
+          return (item[title].toString().toLowerCase()
+          .indexOf(name.toString().toLowerCase())!==-1)
+        })
+      }
+    });
+    return this.body;
+    
+  
+    
+
   }
   
   sources() {
     this.sharedService.getDetails().subscribe((x) => {
       this.source = x;
-     
-      
-    });
+    })
   }
   deleted(item: any) {
     this.delete.emit(item);
@@ -67,6 +99,7 @@ export class TableComponent implements OnInit {
     this.page = event;
     
   }
+  public display=false;
 public item=false;
   sort(title:any){
     title=title.toLowerCase();
@@ -79,7 +112,11 @@ public item=false;
   const nameB = b[title];
         
         if(nameA > nameB){
-          return -1;
+          
+          return 1;
+        }
+        if(nameA < nameB){
+          return -1
         }
         return 0;
       })
@@ -89,8 +126,11 @@ public item=false;
       this.body=this.source.sort((a:any,b:any)=>{
         const nameA = a[title]; 
    const nameB = b[title];
+       if(nameA > nameB){
+        return -1;
+       }
         if(nameA < nameB){
-          return -1;
+          return 1;
         }
        
          return 0;

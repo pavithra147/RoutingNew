@@ -8,7 +8,7 @@
     </div>
     <div *ngIf="formDetails.get('name')?.touched && formDetails.get('name')?.invalid" class="text-danger">
         <small *ngIf="formDetails.get('name')?.errors?.['required']">Name is required</small>
-        <small *ngIf="formDetails.get('name')?.errors?.['pattern']">Fill the name in correct format</small>
+        <small *ngIf="formDetails.get('name')?.errors?.['pattern']">Please enter atleast 6 characters</small>
     </div>
     <div class=" my-2 px-5">
         <label>Age</label>
@@ -16,7 +16,14 @@
     </div>
     <div *ngIf="formDetails.get('age')?.touched && formDetails.get('age')?.invalid" class="text-danger">
         <small *ngIf="formDetails.get('age')?.errors?.['required']">Age is required</small>
-        <small *ngIf="formDetails.get('age')?.errors?.['pattern']">Fill the age in correct format</small>
+        <small *ngIf="formDetails.get('age')?.errors?.['pattern']">Please enter the Valid Age</small>
+    </div>
+    <div class=" my-2 px-5">
+        <label>DOB</label>
+        <input class="form-control" type="date" formControlName="dob"  >
+    </div>
+    <div *ngIf="formDetails.get('dob')?.touched && formDetails.get('dob')?.invalid" class="text-danger">
+        <small *ngIf="formDetails.get('dob')?.errors?.['required']">Select DOB</small>
     </div>
     <div class=" my-2 px-5">
         <label>Address</label>
