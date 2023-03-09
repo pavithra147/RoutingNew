@@ -3,10 +3,10 @@ import {
   EventEmitter,
   Input,
   OnInit,
-  Output,
-  ViewChild,
+  Output
+  
 } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 import { SharedService } from 'src/app/shared.service';
 
@@ -17,12 +17,13 @@ import { SharedService } from 'src/app/shared.service';
 })
 export class TableComponent implements OnInit {
  
-  name= new FormControl('');
+ name= new FormControl('');
   ageNo=new FormControl('');
   dob=new FormControl();
   address=new FormControl('');
   phoneNo=new FormControl('');
   location=new FormControl('');
+
   @Input() head: string[] = [];
   @Input() body: any[] = [];
   public page: number = 1;
@@ -35,7 +36,7 @@ export class TableComponent implements OnInit {
   public user:any;
   public age:any;
   public show=false;
-  public collect:any[]=[];
+  public collect:any;
 
   
 
@@ -45,10 +46,10 @@ export class TableComponent implements OnInit {
    this.sources();
    
   }
- 
+ public collection:any
   filtering(data:any , title:any){
      title=title.toLowerCase();
-     this.collect.push(data.value.filter);
+    
     // this.user=this.body.filter((el)=>{
     //   title=title;
     //    return el[title] == data.value.filter;
@@ -64,19 +65,19 @@ export class TableComponent implements OnInit {
     // }
      console.log(this.collect);
      
-    this.collect.forEach((name:any,index)=>{
-      if(name){
-        console.log(index);
+    // this.collect.forEach((name:any,index)=>{
+    //   if(name){
+    //     console.log(index);
         
-        this.body=this.body.filter((item)=>{
-          console.log(item[title]);
+    //     this.body=this.body.filter((item)=>{
+    //       console.log(item[title]);
           
-          return (item[title].toString().toLowerCase()
-          .indexOf(name.toString().toLowerCase())!==-1)
-        })
-      }
-    });
-    return this.body;
+    //       return (item[title].toString().toLowerCase()
+    //       .indexOf(name.toString().toLowerCase())!==-1)
+    //     })
+    //   }
+    // });
+    // return this.body;
     
   
     
@@ -84,8 +85,9 @@ export class TableComponent implements OnInit {
   }
   
   sources() {
-    this.sharedService.getDetails().subscribe((x) => {
-      this.source = x;
+    this.sharedService.getDetails().subscribe( {
+    next:(x:any)=> this.source = x,
+    error:(error:any)=>{alert("something went wrong")}
     })
   }
   deleted(item: any) {
@@ -103,8 +105,10 @@ export class TableComponent implements OnInit {
 public item=false;
   sort(title:any){
     title=title.toLowerCase();
-    this.sharedService.getDetails().subscribe((a:any)=>{
-    this.source=a;
+    this.sharedService.getDetails().subscribe({
+    next:(a:any)=> this.source=a,
+    error:(error:any)=>{alert("something went wrong")}
+    })
     
     if(this.item==true){
     this.body=this.source.sort((a:any,b:any)=>{
@@ -137,8 +141,8 @@ public item=false;
        })
        this.item=true;
    }
-    })
-  }
+    }
+  
   toggle(){
     this.show=!this.show;
   }

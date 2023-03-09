@@ -53,8 +53,8 @@ export class DetailsComponent implements OnInit {
   }
 
   editByCheck() {
-    this.sharedService.getDetails().subscribe((x) => {
-      this.item = x;
+    this.sharedService.getDetails().subscribe( {
+      next:(x:any)=>{this.item = x;
       this.item = this.item.filter((a: any) => {
         if (a.id == this.num) {
           return a;
@@ -73,7 +73,14 @@ export class DetailsComponent implements OnInit {
         phoneNo: this.out.phoneNo,
         location: this.out.location,
       });
-    });
+    },
+    error:(error:any)=>{
+      alert("something went wrong")
+    }
+    })
+
+  
+  
   }
 
   onSubmit() {

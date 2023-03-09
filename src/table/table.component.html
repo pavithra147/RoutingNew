@@ -12,13 +12,13 @@
         <th *ngFor="let title of head"  class="pointer" ><i *ngIf="item" class="fas fa-arrow-up"  (click)="sort(title)"></i><i *ngIf="!item" class="fas fa-arrow-down"  (click)="sort(title)"></i>&nbsp; {{ title }} &nbsp;&nbsp;<i class="fas fa-caret-down" (click)="toggle()" ></i>
           <div>
             <!-- <form #filterdata="ngForm" (ngSubmit)="filtering(filterdata , title)">
-            <input type="text" class="form-control"id="filter" ngModel name="filter" >
+            <input type="text" class="form-control"id="filter" name="filter" [(ngModel)]="filter" >
            </form> -->
-           <!-- <input type="text" id="name" class="form-control" [formControl]="names" [(ngModel)]="filter"> -->
+           <!-- <input type="text" id="name" class="form-control" [(ngModel)]="filter"> -->
           </div>
         </th>
           
-      </tr>
+      </tr> 
     </thead>
     <tbody>
       <tr *ngIf="show">
