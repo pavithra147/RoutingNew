@@ -9,31 +9,42 @@
   <table class="table table-responsive my-5">
     <thead>
       <tr>
-        <th *ngFor="let title of head"  class="pointer" ><i *ngIf="item" class="fas fa-arrow-up"  (click)="sort(title)"></i><i *ngIf="!item" class="fas fa-arrow-down"  (click)="sort(title)"></i>&nbsp; {{ title }} &nbsp;&nbsp;<i class="fas fa-caret-down" (click)="toggle()" ></i>
-          <div>
+        <th *ngFor="let title of head ;let i=index"  class="pointer" ><i *ngIf="item" class="fas fa-arrow-up " (click)="sort(title,i-1)"></i> <i *ngIf="!item" class="fas fa-arrow-down" (click)="sort(title,i-1)"></i>&nbsp;{{ title }} &nbsp;&nbsp;<i class="fas fa-caret-down" (click)="toggle()" ></i>
+          <div >
             <!-- <form #filterdata="ngForm" (ngSubmit)="filtering(filterdata , title)">
             <input type="text" class="form-control"id="filter" name="filter" [(ngModel)]="filter" >
            </form> -->
            <!-- <input type="text" id="name" class="form-control" [(ngModel)]="filter"> -->
+           <!-- <td>
+          <input type="text" id="title" class="form-control" [formControl]="values">
+         
+        </td> -->
           </div>
         </th>
           
       </tr> 
     </thead>
     <tbody>
-      <tr *ngIf="show">
-        <td><input type="text" id="s.no" class="form-control"></td>
+       <tr *ngIf="show">
+        <!-- <td><input type="text" id="s.no" class="form-control"></td>
         <td><input type="text" id="name" class="form-control" [formControl]="name"></td>
         <td><input type="text" id="age" class="form-control" [formControl]="ageNo"></td>
         <td><input type="text"  id="dob"class="form-control" [formControl]="dob"></td>
         <td><input type="text" id="address" class="form-control" [formControl]="address"></td>
         <td><input type="text" id="phoneNo" class="form-control" [formControl]="phoneNo"></td>
         <td><input type="text" id="location" class="form-control" [formControl]="location"></td>
-        <td><input type="text" id="Action"class="form-control"></td>
+        <td><input type="text" id="Action"class="form-control"></td>  -->
+        <td *ngFor="let values of inputValues">
+          <input type="text"id="title" class="form-control" [formControl]="values">
+          <div>
+            {{values.value}}
+          </div>
+        </td>
+        
       </tr>
       <tr
         *ngFor="
-        let item of body |sort:[name.value,ageNo.value,dob.value,address.value,phoneNo.value,location.value]:['name','age','dob','address','phoneNo','location'] | filter:age 
+        let item of body |sort:[]:[] | filter:age 
           | paginate
           : {
               itemsPerPage: tableSize,

@@ -1,11 +1,5 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output
-  
-} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { SharedService } from 'src/app/shared.service';
@@ -16,14 +10,14 @@ import { SharedService } from 'src/app/shared.service';
   styleUrls: ['./table.component.css'],
 })
 export class TableComponent implements OnInit {
+  name = new FormControl('');
+  ageNo = new FormControl('');
+  dob = new FormControl();
+  address = new FormControl('');
+  phoneNo = new FormControl('');
+  location = new FormControl('');
  
- name= new FormControl('');
-  ageNo=new FormControl('');
-  dob=new FormControl();
-  address=new FormControl('');
-  phoneNo=new FormControl('');
-  location=new FormControl('');
-
+  @Input() inputValues:any[]=[];
   @Input() head: string[] = [];
   @Input() body: any[] = [];
   public page: number = 1;
@@ -32,63 +26,60 @@ export class TableComponent implements OnInit {
   public filter!: string;
   @Output() delete = new EventEmitter<string>();
   @Output() edit = new EventEmitter<string>();
-  public source!:any;
-  public user:any;
-  public age:any;
-  public show=false;
-  public collect:any;
+  public source!: any;
+  public user: any;
+  public age: any;
+  public show = false;
+  public collect: any;
 
-  
-
-  constructor(private sharedService: SharedService) {}
+  constructor(private sharedService: SharedService,private http:HttpClient) {}
 
   ngOnInit() {
-   this.sources();
+    this.sources();
+
    
   }
- public collection:any
-  filtering(data:any , title:any){
-     title=title.toLowerCase();
-    
+  public collection: any;
+  filtering(data: any, title: any) {
+    title = title.toLowerCase();
+
     // this.user=this.body.filter((el)=>{
     //   title=title;
     //    return el[title] == data.value.filter;
-    //   }) 
+    //   })
     //   console.log(data.value);
-      
+
     // if(this.user.length==0){
     //   return this.body=this.source;
     // }
-   
+
     // else{
     //   return this.body=this.user;
     // }
-     console.log(this.collect);
-     
+    console.log(this.collect);
+
     // this.collect.forEach((name:any,index)=>{
     //   if(name){
     //     console.log(index);
-        
+
     //     this.body=this.body.filter((item)=>{
     //       console.log(item[title]);
-          
+
     //       return (item[title].toString().toLowerCase()
     //       .indexOf(name.toString().toLowerCase())!==-1)
     //     })
     //   }
     // });
     // return this.body;
-    
-  
-    
-
   }
-  
+
   sources() {
-    this.sharedService.getDetails().subscribe( {
-    next:(x:any)=> this.source = x,
-    error:(error:any)=>{alert("something went wrong")}
-    })
+    this.sharedService.getDetails().subscribe({
+      next: (x: any) => (this.source = x),
+      error: (error: any) => {
+        alert('something went wrong');
+      },
+    });
   }
   deleted(item: any) {
     this.delete.emit(item);
@@ -99,54 +90,71 @@ export class TableComponent implements OnInit {
 
   onTableDataChange(event: any) {
     this.page = event;
-    
   }
-  public display=false;
-public item=false;
-  sort(title:any){
-    title=title.toLowerCase();
+  public display = true;
+  public item = false;
+  sort(title: any, index: any) {
+    title = title.toLowerCase();
+    console.log(title);
+   
+  
     this.sharedService.getDetails().subscribe({
-    next:(a:any)=> this.source=a,
-    error:(error:any)=>{alert("something went wrong")}
-    })
-    
-    if(this.item==true){
-    this.body=this.source.sort((a:any,b:any)=>{
-       const nameA = a[title]; 
-  const nameB = b[title];
+      next: (a: any) => {this.source = a
         
-        if(nameA > nameB){
-          
+      },
+      error: (error: any) => {
+        alert('something went wrong');
+      },
+    });
+
+    if (this.item == true) {
+      this.body = this.source.sort((a: any, b: any) => {
+      
+        console.log(title);
+
+      
+
+        const nameA = a[title];
+        const nameB = b[title];
+
+        if (nameA > nameB) {
           return 1;
         }
-        if(nameA < nameB){
-          return -1
+        if (nameA < nameB) {
+          return -1;
         }
         return 0;
-      })
-      this.item=false;
-    }
-    else{
-      this.body=this.source.sort((a:any,b:any)=>{
-        const nameA = a[title]; 
-   const nameB = b[title];
-       if(nameA > nameB){
-        return -1;
-       }
-        if(nameA < nameB){
+      });
+
+      this.item = false;
+    } else {
+      this.body = this.source.sort((a: any, b: any) => {
+        const nameA = a[title];
+        const nameB = b[title];
+
+        if (nameA > nameB) {
+          return -1;
+        }
+        if (nameA < nameB) {
           return 1;
         }
-       
-         return 0;
-       })
-       this.item=true;
-   }
+
+        return 0;
+      });
+      this.item = true;
+      //  if(index==title[index]){
+      //   this.display=true;
+      //  }
     }
-  
-  toggle(){
-    this.show=!this.show;
   }
 
+  toggle() {
+    this.show = !this.show;
+  }
+
+  // icon(index:any){
+  //  this.display=!this.display;
+  // }
+ 
+ 
 }
-
-

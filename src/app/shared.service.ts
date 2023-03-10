@@ -50,4 +50,7 @@ export class SharedService {
   put(id: any, value: any) {
     return this.http.put(`http://localhost:3000/details/${id}`, value);
   }
+  getdynamic(){
+    return this.http.get("http://localhost:3000/inputval");
+  }
 }

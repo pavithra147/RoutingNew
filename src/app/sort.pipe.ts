@@ -6,7 +6,7 @@ import { pipe } from 'rxjs';
   pure: true,
 })
 export class SortPipe implements PipeTransform {
-  transform(list: any[], value: string[], key: string[]): any {
+  transform(list: any[], value: any[], key: string[]): any {
     value.forEach((name: any, index) => {
       if (name) {
         list = list.filter((item) => {
