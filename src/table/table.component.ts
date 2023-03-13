@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { SharedService } from 'src/app/shared.service';
 
@@ -16,8 +17,8 @@ export class TableComponent implements OnInit {
   address = new FormControl('');
   phoneNo = new FormControl('');
   location = new FormControl('');
- 
-  @Input() inputValues:any[]=[];
+  @Input() headForEmployee: string[] = [];
+  @Input() inputValues: any[] = [];
   @Input() head: string[] = [];
   @Input() body: any[] = [];
   public page: number = 1;
@@ -31,13 +32,27 @@ export class TableComponent implements OnInit {
   public age: any;
   public show = false;
   public collect: any;
-
-  constructor(private sharedService: SharedService,private http:HttpClient) {}
+  public admin = false;
+  constructor(
+    private sharedService: SharedService,
+    private http: HttpClient,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.sources();
+    this.validate();
+  }
 
-   
+  validate() {
+    this.route.params.subscribe((params) => {
+      this.collect = params;
+      //console.log(this.collect.check);
+
+      if (this.collect.check === 'Admin') {
+        this.admin = true;
+      }
+    });
   }
   public collection: any;
   filtering(data: any, title: any) {
@@ -57,20 +72,6 @@ export class TableComponent implements OnInit {
     //   return this.body=this.user;
     // }
     console.log(this.collect);
-
-    // this.collect.forEach((name:any,index)=>{
-    //   if(name){
-    //     console.log(index);
-
-    //     this.body=this.body.filter((item)=>{
-    //       console.log(item[title]);
-
-    //       return (item[title].toString().toLowerCase()
-    //       .indexOf(name.toString().toLowerCase())!==-1)
-    //     })
-    //   }
-    // });
-    // return this.body;
   }
 
   sources() {
@@ -91,16 +92,26 @@ export class TableComponent implements OnInit {
   onTableDataChange(event: any) {
     this.page = event;
   }
-  public display = true;
+  public display = false;
   public item = false;
+  public indexNumber:any;
+
+
+
   sort(title: any, index: any) {
+    //console.log(index);
+    //console.log(this.head[index].toLowerCase());
+    
+    
     title = title.toLowerCase();
-    console.log(title);
-   
-  
+    // if(title === this.head[index].toLowerCase()){
+    //   this.display =true;
+    // }
+ 
+
     this.sharedService.getDetails().subscribe({
-      next: (a: any) => {this.source = a
-        
+      next: (a: any) => {
+        this.source = a;
       },
       error: (error: any) => {
         alert('something went wrong');
@@ -109,11 +120,14 @@ export class TableComponent implements OnInit {
 
     if (this.item == true) {
       this.body = this.source.sort((a: any, b: any) => {
-      
         console.log(title);
+       // console.log(this.indexNumber);
+       console.log(this.head[index].toLowerCase());
 
-      
-
+      //  if(title === this.head[index].toLowerCase()){
+      //   this.display =true;
+      // }
+    
         const nameA = a[title];
         const nameB = b[title];
 
@@ -125,10 +139,11 @@ export class TableComponent implements OnInit {
         }
         return 0;
       });
-
+     // this.display=false
       this.item = false;
     } else {
       this.body = this.source.sort((a: any, b: any) => {
+       
         const nameA = a[title];
         const nameB = b[title];
 
@@ -142,9 +157,9 @@ export class TableComponent implements OnInit {
         return 0;
       });
       this.item = true;
-      //  if(index==title[index]){
-      //   this.display=true;
-      //  }
+      
+        //this.display=true;
+       
     }
   }
 
@@ -155,6 +170,4 @@ export class TableComponent implements OnInit {
   // icon(index:any){
   //  this.display=!this.display;
   // }
- 
- 
 }

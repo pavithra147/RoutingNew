@@ -14,13 +14,17 @@ import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SortPipe } from './sort.pipe';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 @NgModule({
   declarations: [
     AppComponent,
     DetailsComponent,
     DisplayComponent,
     TableComponent,
-    SortPipe
+    SortPipe,
+    LoginComponent,
+    SignUpComponent
    
   ],
   imports: [

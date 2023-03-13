@@ -1,0 +1,34 @@
+<form  class="container p-3 my-5 border col-xs-6 col-md-4 " [formGroup]="signUpForm" (ngSubmit)="submit()">
+    <h1>SignUp Form</h1>
+    <div class="form-group my-3">
+        <label>Username</label>
+        <input class="form-control"type="text" placeholder="Enter Username" formControlName="userName">
+    </div>
+    <div *ngIf="signUpForm.get('userName')?.touched && signUpForm.get('userName')?.invalid" class="text-danger">
+        <small *ngIf="signUpForm.get('userName')?.errors?.['required']">User Name is required</small>
+        
+    </div>
+    <div class="form-group my-3">
+        <label>Email Id</label>
+        <input class="form-control" type="text" placeholder="Enter Mail Id" formControlName="emailId">
+    </div>
+    <div *ngIf="signUpForm.get('emailId')?.touched && signUpForm.get('emailId')?.invalid" class="text-danger">
+        <small *ngIf="signUpForm.get('emailId')?.errors?.['required']">Email Id is required</small>
+       
+    </div>
+    <div class="form-group my-3">
+        <label>Password</label>
+        <input class="form-control" type="text" placeholder="Enter Password" formControlName="password">
+    </div>
+    <div *ngIf="signUpForm.get('password')?.touched && signUpForm.get('password')?.invalid" class="text-danger">
+        <small *ngIf="signUpForm.get('password')?.errors?.['required']">Password is required</small>
+       
+    </div>
+    <div class="form-group my-3" >
+       <label for="role">Role</label>
+       <select id="role"  class="form-control" formControlName="role">
+         <option *ngFor="let role of option" >{{role}}</option>
+       </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>

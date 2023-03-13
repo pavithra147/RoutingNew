@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DetailsComponent } from './details/details.component';
 import { DisplayComponent } from './display/display.component';
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 const routes: Routes = [
-  {path:'',redirectTo:'display',pathMatch:'full'},
+  {path:'',redirectTo:'login',pathMatch:'full'},
   {path:'details',component:DetailsComponent},
   {path:'detail/:data',component:DetailsComponent},
-  {path:'display',component:DisplayComponent}
+  {path:'display/:check',component:DisplayComponent},
+  {path:'login',component:LoginComponent},
+  {path:'signUp',component:SignUpComponent}
 ]
 
 

@@ -1,81 +1,306 @@
-<div class="fonttable">
-  <div>
-    <!-- <form #filterdata="ngForm" (ngSubmit)="filtering(filterdata)">
+<div *ngIf="admin">
+  <div class="fonttable">
+    <div>
+      <!-- <form #filterdata="ngForm" (ngSubmit)="filtering(filterdata)">
       <input type="text" id="filter" ngModel  name="filter" placeholder="Enter Age">
       <button>click</button>
     </form> -->
-    <input type="text" class="form-control" placeholder="Enter age" [(ngModel)]="age">
-  </div>
-  <table class="table table-responsive my-5">
-    <thead>
-      <tr>
-        <th *ngFor="let title of head ;let i=index"  class="pointer" ><i *ngIf="item" class="fas fa-arrow-up " (click)="sort(title,i-1)"></i> <i *ngIf="!item" class="fas fa-arrow-down" (click)="sort(title,i-1)"></i>&nbsp;{{ title }} &nbsp;&nbsp;<i class="fas fa-caret-down" (click)="toggle()" ></i>
-          <div >
-            <!-- <form #filterdata="ngForm" (ngSubmit)="filtering(filterdata , title)">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Enter age"
+        [(ngModel)]="age"
+      />
+    </div>
+    <table class="table table-responsive my-5">
+      <thead>
+        <tr>
+          <th *ngFor="let title of head; let i = index" class="pointer"  (click)="sort(title, i)" >
+            <i
+              *ngIf="item"
+              class="fas fa-arrow-up"
+              
+            ></i>
+            <i
+              *ngIf="!item"
+              class="fas fa-arrow-down"
+              
+            ></i
+            >&nbsp;{{ title }} &nbsp;&nbsp;<i
+              class="fas fa-caret-down"
+              (click)="toggle()"
+            ></i>
+            <div>
+              <!-- <form #filterdata="ngForm" (ngSubmit)="filtering(filterdata , title)">
             <input type="text" class="form-control"id="filter" name="filter" [(ngModel)]="filter" >
            </form> -->
-           <!-- <input type="text" id="name" class="form-control" [(ngModel)]="filter"> -->
-           <!-- <td>
+              <!-- <input type="text" id="name" class="form-control" [(ngModel)]="filter"> -->
+              <!-- <td>
           <input type="text" id="title" class="form-control" [formControl]="values">
          
         </td> -->
-          </div>
-        </th>
-          
-      </tr> 
-    </thead>
-    <tbody>
-       <tr *ngIf="show">
-        <!-- <td><input type="text" id="s.no" class="form-control"></td>
-        <td><input type="text" id="name" class="form-control" [formControl]="name"></td>
-        <td><input type="text" id="age" class="form-control" [formControl]="ageNo"></td>
-        <td><input type="text"  id="dob"class="form-control" [formControl]="dob"></td>
-        <td><input type="text" id="address" class="form-control" [formControl]="address"></td>
-        <td><input type="text" id="phoneNo" class="form-control" [formControl]="phoneNo"></td>
-        <td><input type="text" id="location" class="form-control" [formControl]="location"></td>
-        <td><input type="text" id="Action"class="form-control"></td>  -->
-        <td *ngFor="let values of inputValues">
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="show">
+          <td><input type="text" id="s.no" class="form-control" /></td>
+          <td>
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              [formControl]="name"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              id="age"
+              class="form-control"
+              [formControl]="ageNo"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              id="dob"
+              class="form-control"
+              [formControl]="dob"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              id="address"
+              class="form-control"
+              [formControl]="address"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              id="phoneNo"
+              class="form-control"
+              [formControl]="phoneNo"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              id="location"
+              class="form-control"
+              [formControl]="location"
+            />
+          </td>
+          <td><input type="text" id="Action" class="form-control" /></td>
+          <!-- <td *ngFor="let values of inputValues">
           <input type="text"id="title" class="form-control" [formControl]="values">
           <div>
             {{values.value}}
           </div>
-        </td>
-        
-      </tr>
-      <tr
-        *ngFor="
-        let item of body |sort:[]:[] | filter:age 
-          | paginate
-          : {
-              itemsPerPage: tableSize,
-              currentPage: page,
-              totalItems: count
-            };
-          let i = index
-        "
+        </td> -->
+        </tr>
+        <tr
+          *ngFor="
+            let item of body
+              | sort
+                : [
+                    name.value,
+                    ageNo.value,
+                    dob.value,
+                    address.value,
+                    phoneNo.value,
+                    location.value
+                  ]
+                : ['name', 'age', 'dob', 'address', 'phoneNo', 'location']
+              | filter : age
+              | paginate
+                : {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: count
+                  };
+            let i = index
+          "
+        >
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.age }}</td>
+          <td>{{ item.dob }}</td>
+          <td>{{ item.address }}</td>
+
+          <td>{{ item.phoneNo }}</td>
+          <td>{{ item.location }}</td>
+          <button (click)="deleted(item.id)">
+            <i class="fas fa-trash"></i></button
+          >&nbsp;
+          <button (click)="editable(item.id)">
+            <i class="fas fa-pen"></i>
+          </button>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+      <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        (pageChange)="onTableDataChange($event)"
       >
-     
-        <td>{{ i+1 }}</td>
-        <td> {{ item.name }}</td>
-        <td>{{ item.age }}</td>
-        <td>{{item.dob}}</td>
-        <td>{{ item.address }}</td>
-        
-        <td>{{ item.phoneNo }}</td>
-        <td>{{ item.location }}</td>
-        <button (click)="deleted(item.id)"><i class="fas fa-trash"></i></button
-        >&nbsp;
-        <button (click)="editable(item.id)"><i class="fas fa-pen"></i></button>
-      </tr>
-      
-    </tbody>
-  </table>
-  <div class="d-flex justify-content-center">
-    <pagination-controls
-      previousLabel="Prev"
-      nextLabel="Next"
-      (pageChange)="onTableDataChange($event)"
-    >
-    </pagination-controls>
+      </pagination-controls>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!admin">
+  <div class="fonttable">
+    <div>
+      <!-- <form #filterdata="ngForm" (ngSubmit)="filtering(filterdata)">
+        <input type="text" id="filter" ngModel  name="filter" placeholder="Enter Age">
+        <button>click</button>
+      </form> -->
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Enter age"
+        [(ngModel)]="age"
+      />
+    </div>
+    <table class="table table-responsive my-5">
+      <thead>
+        <tr>
+          <th
+            *ngFor="let title of headForEmployee; let i = index"
+            class="pointer"
+          >
+            <i
+              *ngIf="item"
+              class="fas fa-arrow-up"
+              (click)="sort(title, i - 1)"
+            ></i>
+            <i
+              *ngIf="!item"
+              class="fas fa-arrow-down"
+              (click)="sort(title, i - 1)"
+            ></i
+            >&nbsp;{{ title }} &nbsp;&nbsp;<i
+              class="fas fa-caret-down"
+              (click)="toggle()"
+            ></i>
+            <div>
+              <!-- <form #filterdata="ngForm" (ngSubmit)="filtering(filterdata , title)">
+              <input type="text" class="form-control"id="filter" name="filter" [(ngModel)]="filter" >
+             </form> -->
+              <!-- <input type="text" id="name" class="form-control" [(ngModel)]="filter"> -->
+              <!-- <td>
+            <input type="text" id="title" class="form-control" [formControl]="values">
+           
+          </td> -->
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="show">
+          <td><input type="text" id="s.no" class="form-control" /></td>
+          <td>
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              [formControl]="name"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              id="age"
+              class="form-control"
+              [formControl]="ageNo"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              id="dob"
+              class="form-control"
+              [formControl]="dob"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              id="address"
+              class="form-control"
+              [formControl]="address"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              id="phoneNo"
+              class="form-control"
+              [formControl]="phoneNo"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              id="location"
+              class="form-control"
+              [formControl]="location"
+            />
+          </td>
+         
+          <!-- <td *ngFor="let values of inputValues">
+            <input type="text"id="title" class="form-control" [formControl]="values">
+            <div>
+              {{values.value}}
+            </div>
+          </td> -->
+        </tr>
+        <tr
+          *ngFor="
+            let item of body
+              | sort
+                : [
+                    name.value,
+                    ageNo.value,
+                    dob.value,
+                    address.value,
+                    phoneNo.value,
+                    location.value
+                  ]
+                : ['name', 'age', 'dob', 'address', 'phoneNo', 'location']
+              | filter : age
+              | paginate
+                : {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: count
+                  };
+            let i = index
+          "
+        >
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.age }}</td>
+          <td>{{ item.dob }}</td>
+          <td>{{ item.address }}</td>
+
+          <td>{{ item.phoneNo }}</td>
+          <td>{{ item.location }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+      <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        (pageChange)="onTableDataChange($event)"
+      >
+      </pagination-controls>
+    </div>
   </div>
 </div>

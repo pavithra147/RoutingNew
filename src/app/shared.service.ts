@@ -53,4 +53,11 @@ export class SharedService {
   getdynamic(){
     return this.http.get("http://localhost:3000/inputval");
   }
+
+  signUpDetails(values:any){
+    return this.http.post("http://localhost:3000/register",values);
+  }
+  getSignUpDetails(){
+    return this.http.get("http://localhost:3000/register");
+  }
 }

@@ -105,7 +105,7 @@ export class DetailsComponent implements OnInit {
       }
       else{
         this.sharedService.postDetails(values).subscribe( {
-          next:(valu:any)=>{},
+          next:(value:any)=>{},
           error:(error:any)=>{alert("something went wrong")}
           
         });
