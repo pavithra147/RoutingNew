@@ -25,6 +25,7 @@ export class SharedService {
   sendData(data: any) {
     this.array.push(data);
     this.subject.next(this.array);
+    
   }
   editData(index: any, data: any) {
     this.array[index] = data;

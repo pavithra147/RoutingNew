@@ -6,10 +6,11 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
 const routes: Routes = [
-  {path:'',redirectTo:'login',pathMatch:'full'},
+  {path:'',redirectTo:'/login',pathMatch:'full'},
   {path:'details',component:DetailsComponent},
   {path:'detail/:data',component:DetailsComponent},
   {path:'display/:check',component:DisplayComponent},
+  {path:'displays',component:DisplayComponent},
   {path:'login',component:LoginComponent},
   {path:'signUp',component:SignUpComponent}
 ]

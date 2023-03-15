@@ -17,6 +17,9 @@ export class DetailsComponent implements OnInit {
   public formdata: any;
   public item: any;
   public out!: any;
+  public sample!: any;
+  b: any;
+  //a:any;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -31,11 +34,11 @@ export class DetailsComponent implements OnInit {
 
   form() {
     this.formDetails = this.formBuilder.group({
-      name: ['', [Validators.required,Validators.pattern('^[A-Za-z].{5,20}')]],
-      age: ['', [Validators.required,Validators.pattern('^[1-9].{1}')]],
-      dob:[ 0,[Validators.required]],
+      name: ['', [Validators.required, Validators.pattern('^[A-Za-z].{5,20}')]],
+      age: ['', [Validators.required, Validators.pattern('^[1-9].{1}')]],
+      dob: [0, [Validators.required]],
       address: ['', [Validators.required]],
-      phoneNo: ['', [Validators.required,Validators.pattern('^[6-9].{9}')]],
+      phoneNo: ['', [Validators.required, Validators.pattern('^[6-9].{9}')]],
       location: ['', [Validators.required]],
     }) as UserFormGroup;
 
@@ -45,7 +48,7 @@ export class DetailsComponent implements OnInit {
   idFromUrl() {
     this.route.params.subscribe((params) => {
       this.num = params['data'];
-      console.log("navigation",this.num);
+      console.log('navigation', this.num);
     });
     if (this.num != undefined) {
       this.editByCheck();
@@ -53,34 +56,36 @@ export class DetailsComponent implements OnInit {
   }
 
   editByCheck() {
-    this.sharedService.getDetails().subscribe( {
-      next:(x:any)=>{this.item = x;
-      this.item = this.item.filter((a: any) => {
-        if (a.id == this.num) {
+    this.sharedService.getDetails().subscribe({
+      next: (b: any) => {
+        this.item = b;
+        this.item = this.item.map((a: any) => {
+          if (a.id == this.num) {
+            return a;
+          }
+        });
+
+        //  this.item=this.item.filter((obj:any )=>{'name' in obj }).map((obj:any) =>{obj.name})
+        //  console.log(this.item);
+
+        this.formdata = this.item.find((a: any) => {
+          //this.out = a;
           return a;
-        }
-      });
-      this.formdata = this.item.map((a: any) => {
-        this.out = a;
-        return a;
-      });
+        });
 
-      this.formDetails.patchValue({
-        name: this.out.name,
-        age: this.out.age,
-        dob:this.out.dob,
-        address: this.out.address,
-        phoneNo: this.out.phoneNo,
-        location: this.out.location,
-      });
-    },
-    error:(error:any)=>{
-      alert("something went wrong")
-    }
-    })
-
-  
-  
+        this.formDetails.patchValue({
+          name: this.formdata.name,
+          age: this.formdata.age,
+          dob: this.formdata.dob,
+          address: this.formdata.address,
+          phoneNo: this.formdata.phoneNo,
+          location: this.formdata.location,
+        });
+      },
+      error: (error: any) => {
+        alert('something went wrong');
+      },
+    });
   }
 
   onSubmit() {
@@ -89,7 +94,7 @@ export class DetailsComponent implements OnInit {
       let values = {
         name: this.formDetails.get('name')?.value,
         age: this.formDetails.get('age')?.value,
-        dob:this.formDetails.get('dob')?.value,
+        dob: this.formDetails.get('dob')?.value,
         address: this.formDetails.get('address')?.value,
         phoneNo: this.formDetails.get('phoneNo')?.value,
         location: this.formDetails.get('location')?.value,
@@ -98,37 +103,23 @@ export class DetailsComponent implements OnInit {
       this.out = values;
       if (this.num != null) {
         this.sharedService.put(this.num, this.out).subscribe({
-          next:(value:any)=>{},
-          error:(error:any)=>{alert("something went wrong")}
+          next: (value: any) => {},
+          error: (error: any) => {
+            alert('something went wrong');
+          },
         });
-        this.router.navigate(['/display']);
-      }
-      else{
-        this.sharedService.postDetails(values).subscribe( {
-          next:(value:any)=>{},
-          error:(error:any)=>{alert("something went wrong")}
-          
+        this.router.navigate(['/displays']);
+      } else {
+        this.sharedService.postDetails(values).subscribe({
+          next: (value: any) => {},
+          error: (error: any) => {
+            alert('something went wrong');
+          },
         });
-        this.router.navigate(['/display']);
+        this.router.navigate(['/displays']);
       }
-
-     
     } else {
       alert('Please fill all the details');
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

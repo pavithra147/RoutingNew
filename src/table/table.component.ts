@@ -42,6 +42,7 @@ export class TableComponent implements OnInit {
   ngOnInit() {
     this.sources();
     this.validate();
+    
   }
 
   validate() {
@@ -92,23 +93,28 @@ export class TableComponent implements OnInit {
   onTableDataChange(event: any) {
     this.page = event;
   }
-  public display = false;
+  public display = true;
   public item = false;
-  public indexNumber:any;
+  public indexNumber: any;
+  public click=0;
 
-
-
+  displayFunction=(title:any)=>{
+    console.log(title);
+  }
   sort(title: any, index: any) {
-    //console.log(index);
-    //console.log(this.head[index].toLowerCase());
-    
-    
     title = title.toLowerCase();
-    // if(title === this.head[index].toLowerCase()){
-    //   this.display =true;
-    // }
- 
+  this.indexNumber=this.head[index].toLowerCase();
+  console.log(this.indexNumber);
+  console.log(title);
 
+  console.log(this.display);
+  // if(title === this.indexNumber){
+  
+  //     this.display=true;
+    
+
+  // }
+  
     this.sharedService.getDetails().subscribe({
       next: (a: any) => {
         this.source = a;
@@ -121,13 +127,16 @@ export class TableComponent implements OnInit {
     if (this.item == true) {
       this.body = this.source.sort((a: any, b: any) => {
         console.log(title);
-       // console.log(this.indexNumber);
-       console.log(this.head[index].toLowerCase());
+        // console.log(this.indexNumber);
+       
 
-      //  if(title === this.head[index].toLowerCase()){
-      //   this.display =true;
-      // }
+      //   if(title === this.indexNumber){
+  
+      //     this.display=true;
+        
     
+      // }
+
         const nameA = a[title];
         const nameB = b[title];
 
@@ -139,11 +148,10 @@ export class TableComponent implements OnInit {
         }
         return 0;
       });
-     // this.display=false
+      // this.display=false
       this.item = false;
     } else {
       this.body = this.source.sort((a: any, b: any) => {
-       
         const nameA = a[title];
         const nameB = b[title];
 
@@ -157,9 +165,8 @@ export class TableComponent implements OnInit {
         return 0;
       });
       this.item = true;
-      
-        //this.display=true;
-       
+
+      //this.display=true;
     }
   }
 

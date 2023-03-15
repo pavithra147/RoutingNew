@@ -9,16 +9,16 @@ import { SharedService } from '../shared.service';
   styleUrls: ['./display.component.css'],
 })
 export class DisplayComponent implements OnInit {
-  public  sNo=new FormControl('');
+  public sNo = new FormControl('');
   public name = new FormControl('');
   public age = new FormControl('');
   public dob = new FormControl('');
   public address = new FormControl('');
-  public phoneNo=new FormControl('');
-  public location=new FormControl('');
-  public action=new FormControl('');
-  public value!:any;
-public collect:any;
+  public phoneNo = new FormControl('');
+  public location = new FormControl('');
+  public action = new FormControl('');
+  public value!: any;
+  public collect: any;
   public headingArray = [
     'SNo',
     'Name',
@@ -30,71 +30,81 @@ public collect:any;
     'Action',
   ];
 
-  public headingForUser =[
+  public headingForUser = [
     'SNo',
     'Name',
     'Age',
     'DOB',
     'Address',
     'PhoneNo',
-    'Location'
-  ]
+    'Location',
+  ];
 
-  public input=[this.sNo,this.name,this.age,this.dob,this.address,this.phoneNo,this.location,this.action]
+  public input = [
+    this.sNo,
+    this.name,
+    this.age,
+    this.dob,
+    this.address,
+    this.phoneNo,
+    this.location,
+    this.action,
+  ];
 
-  constructor(private sharedService: SharedService, private router: Router,private route:ActivatedRoute) {}
+  constructor(
+    private sharedService: SharedService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.details();
     this.check();
-}
+  }
 
- public admin=false;
-  check(){
-    this.route.params.subscribe((params)=>{
-      this.collect = params
+  public admin = false;
+  check() {
+    this.route.params.subscribe((params) => {
+      this.collect = params;
       //console.log(this.collect.check);
-      
-      if(this.collect.check === 'Admin'){
-        this.admin=true;
+
+      if (this.collect.check === 'Admin') {
+        this.admin = true;
       }
-    })
+    });
   }
 
   details() {
     this.sharedService.getDetails().subscribe({
-     next:(x:any)=> {this.value = x;
-   
-    },
-     error:(error:any)=>{alert("something went wrong")}
+      next: (x: any) => {
+        this.value = x;
+      },
+      error: (error: any) => {
+        alert('something went wrong');
+      },
     });
   }
   delete(id: any) {
-    
-        
-        
-          this.sharedService.delete(id).subscribe({
-            next:(x:any)=>{ this.details();},
-            error:(error:any)=>{alert("something went wrong")}
-          });
-          this.details();
-        
-       
-    }
-    // this.sharedService.delete(id).subscribe({
-    //   next:(x:any)=>{ this.details();},
-    //   error:(error:any)=>{alert("something went wrong")}
-    // });
-    // this.details();
-  
+    this.sharedService.delete(id).subscribe({
+      next: (x: any) => {
+        this.details();
+      },
+      error: (error: any) => {
+        alert('something went wrong');
+      },
+    });
+    this.details();
+  }
+  // this.sharedService.delete(id).subscribe({
+  //   next:(x:any)=>{ this.details();},
+  //   error:(error:any)=>{alert("something went wrong")}
+  // });
+  // this.details();
 
   edit(data: any) {
     this.sharedService.edit(data);
 
     this.router.navigate(['/detail', data]);
   }
-  // add() {
-  //   this.router.navigate(['/details']);
-  // }
+ 
 }
-

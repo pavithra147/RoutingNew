@@ -8,7 +8,7 @@
       <input
         type="text"
         class="form-control"
-        placeholder="Enter age"
+        placeholder="Enter Value"
         [(ngModel)]="age"
       />
     </div>
@@ -172,19 +172,19 @@
         <tr>
           <th
             *ngFor="let title of headForEmployee; let i = index"
-            class="pointer"
+            class="pointer"   (click)="sort(title, i )" 
           >
             <i
-              *ngIf="item"
+              *ngIf="display"
               class="fas fa-arrow-up"
-              (click)="sort(title, i - 1)"
+              
             ></i>
             <i
-              *ngIf="!item"
+              *ngIf=""
               class="fas fa-arrow-down"
-              (click)="sort(title, i - 1)"
+             
             ></i
-            >&nbsp;{{ title }} &nbsp;&nbsp;<i
+            >&nbsp;{{ title}} &nbsp;&nbsp;<i
               class="fas fa-caret-down"
               (click)="toggle()"
             ></i>
