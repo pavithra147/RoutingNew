@@ -5,6 +5,7 @@
     <div class=" my-2 px-5">
         <label>Name</label>
         <input class="form-control" type="text" formControlName="name"  >
+       
     </div>
     <div *ngIf="formDetails.get('name')?.touched && formDetails.get('name')?.invalid" class="text-danger">
         <small *ngIf="formDetails.get('name')?.errors?.['required']">Name is required</small>
