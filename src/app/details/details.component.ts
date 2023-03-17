@@ -13,7 +13,7 @@ export class DetailsComponent implements OnInit {
   public formDetails!: UserFormGroup;
   public submit = false;
   public values: any;
-  public finalOut: any;
+  public finalOut: []=[];
   public formdata: any;
   public item: any;
   public out!: any;
@@ -63,6 +63,17 @@ export class DetailsComponent implements OnInit {
           if (a.id == this.num) {
             return a;
           }
+
+          this.item=[{a:10},{b:20}]
+          this.finalOut=this.item.map((a:any)=>{
+            this.out=a
+            
+            return a;
+          })
+          // console.log(this.finalOut);
+          // console.log(this.out);
+          
+          
         });
 
         //  this.item=this.item.filter((obj:any )=>{'name' in obj }).map((obj:any) =>{obj.name})
