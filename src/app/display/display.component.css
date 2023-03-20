@@ -4,4 +4,23 @@ li{
 .border{
     width:200px;
 }
+.navbar{
+    padding-right:5%;
+    background-color: black;
+}
+.nav-item2{
+   padding-right: 5%;
+   font-size: 20px;
+   font-style: italic;
+   color:white;
+}
+.nav-item1{
+    font-size: 20px;
+    font-style: italic;
+    color:white
+}
+.nav-item{
+    font-size: 30px;
+    color:white
+}
 

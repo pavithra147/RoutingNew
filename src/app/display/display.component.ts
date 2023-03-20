@@ -19,6 +19,7 @@ export class DisplayComponent implements OnInit {
   public action = new FormControl('');
   public value!: any;
   public collect: any;
+  public detail:any
   public headingArray = [
     'SNo',
     'Name',
@@ -60,6 +61,16 @@ export class DisplayComponent implements OnInit {
   ngOnInit() {
     this.details();
     this.check();
+    this.getLogin();
+  }
+
+  getLogin(){
+    this.sharedService.getLoginPersonDetail().subscribe({
+      next:(res)=>{this.detail=res;
+      console.log(this.detail);
+      },
+      error:(e)=>{alert("Something Went Wrong")}
+    })
   }
 
   public admin = false;

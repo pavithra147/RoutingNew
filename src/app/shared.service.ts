@@ -1,5 +1,4 @@
 import { HttpClient } from '@angular/common/http';
-import { DeclarationListEmitMode } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from './../environments/environment';
@@ -67,5 +66,11 @@ export class SharedService {
   }
   getSignUpDetails(){
     return this.http.get(`${this.baseUrl}/register`);
+  }
+  loginPersonDetails(values:any){
+    return this.http.post(`${this.baseUrl}/loginDetails`,values);
+  }
+  getLoginPersonDetail(){
+    return this.http.get(`${this.baseUrl}/loginDetails`);
   }
 }

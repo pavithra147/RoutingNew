@@ -11,6 +11,7 @@ import { SharedService } from '../shared.service';
 export class LoginComponent implements OnInit {
    loginForm!:FormGroup;
    check=false;
+ 
   constructor(private fb:FormBuilder,private sharedService:SharedService,private router:Router) { }
 
   ngOnInit(): void {
@@ -19,7 +20,6 @@ export class LoginComponent implements OnInit {
 
   form(){
     this.loginForm= this.fb.group({
-      userName :['',[Validators.required]],
       emailId:['',[Validators.required]],
       password:['',[Validators.required]]
     })
@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
       next:(x:any)=>{
         const emp =x.find((a:any)=>{
           return(
-            a.userName === this.loginForm.value.userName &&
             a.emailId === this.loginForm.value.emailId && 
             a.password === this.loginForm.value.password 
 
@@ -37,8 +36,17 @@ export class LoginComponent implements OnInit {
           )
         });
         if(emp){
-         console.log(emp.role);
-         
+         console.log( emp.userName);
+        let details={
+           userName:emp.userName
+         }
+          this.sharedService.loginPersonDetails(details).subscribe({
+            next:(value)=>{console.log(value);},
+            error:(e)=>{
+              alert("Something Went Wrong")
+            }
+            
+          })
           this.check=emp.role;
           
           this.router.navigate(['/display',this.check]);
@@ -48,7 +56,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/display']);
         }
         else{
-          alert("User not found");
+          alert("EmailId and Password are invalid");
         }
       },
       error:(e)=>{
