@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthServiceService } from '../auth-service.service';
 import { SharedService } from '../shared.service';
 
 @Component({
@@ -53,36 +54,40 @@ export class DisplayComponent implements OnInit {
   ];
 
   constructor(
-    private sharedService: SharedService,
+    public sharedService: SharedService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService:AuthServiceService
   ) {}
 
   ngOnInit() {
     this.details();
     this.check();
-    this.getLogin();
+  
+   
   }
-
-  getLogin(){
-    this.sharedService.getLoginPersonDetail().subscribe({
-      next:(res)=>{this.detail=res;
-      console.log(this.detail);
-      },
-      error:(e)=>{alert("Something Went Wrong")}
-    })
-  }
-
+ 
+//  login(){
+//   this.router.navigate(['/login']);
+//  }
+  
+ //...........................................
   public admin = false;
-  check() {
-    this.route.params.subscribe((params) => {
-      this.collect = params;
-      //console.log(this.collect.check);
 
-      if (this.collect.check === 'Admin') {
-        this.admin = true;
-      }
-    });
+  //...................
+  check() {
+    // this.route.params.subscribe((params) => {
+    //   this.collect = params;
+    //   //console.log(this.collect.check);
+
+    //   if (this.collect.check === 'Admin') {
+    //     this.admin = true;
+    //   }
+    // });
+    const role=sessionStorage.getItem('role');
+    if(role=="Admin"){
+      this.admin=true;
+    }
   }
 
   details() {
@@ -117,5 +122,5 @@ export class DisplayComponent implements OnInit {
 
     this.router.navigate(['/detail', data]);
   }
- 
+
 }

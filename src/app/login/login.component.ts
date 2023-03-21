@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthServiceService } from '../auth-service.service';
 import { SharedService } from '../shared.service';
 
 @Component({
@@ -11,11 +12,15 @@ import { SharedService } from '../shared.service';
 export class LoginComponent implements OnInit {
    loginForm!:FormGroup;
    check=false;
- 
-  constructor(private fb:FormBuilder,private sharedService:SharedService,private router:Router) { }
+ id!:number
+  constructor(private fb:FormBuilder,public sharedService:SharedService,private router:Router,private authService:AuthServiceService) { }
 
   ngOnInit(): void {
+   
+   
+   
     this.form();
+   
   }
 
   form(){
@@ -36,25 +41,22 @@ export class LoginComponent implements OnInit {
           )
         });
         if(emp){
+          this.authService.login();
+         console.log( this.authService.login());
+         
+          
          console.log( emp.userName);
-        let details={
-           userName:emp.userName
-         }
-          this.sharedService.loginPersonDetails(details).subscribe({
-            next:(value)=>{console.log(value);},
-            error:(e)=>{
-              alert("Something Went Wrong")
-            }
+         console.log( emp.id);
+        sessionStorage.setItem('name',emp.userName)
             
-          })
-          this.check=emp.role;
+         sessionStorage.setItem('role',emp.role)
+        //  this.check=emp.role;
           
-          this.router.navigate(['/display',this.check]);
-        }
-        else if(this.loginForm.value.userName=='Pavithra' && this.loginForm.value.password=='pavi@123'){
-          
+          // this.router.navigate(['/display',this.check]);
           this.router.navigate(['/display']);
         }
+        
+     
         else{
           alert("EmailId and Password are invalid");
         }

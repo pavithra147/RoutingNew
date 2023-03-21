@@ -1,13 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from './../environments/environment';
+
+import { AuthServiceService } from './auth-service.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SharedService {
-  public baseUrl=environment.apiUrl;   
+  public baseUrl=environment.apiUrl;
+  public title=environment.title;
   private subject: BehaviorSubject<string>;
   public obs$: Observable<any>;
   private sub: BehaviorSubject<string>;
@@ -17,7 +21,7 @@ export class SharedService {
   public array: any = [];
   public index: any;
   public table = true;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private authService:AuthServiceService,private router:Router) {
     this.subject = new BehaviorSubject<string>('');
     this.obs$ = this.subject.asObservable();
     this.sub = new BehaviorSubject<string>('');
@@ -67,10 +71,22 @@ export class SharedService {
   getSignUpDetails(){
     return this.http.get(`${this.baseUrl}/register`);
   }
-  loginPersonDetails(values:any){
-    return this.http.post(`${this.baseUrl}/loginDetails`,values);
+  public detail:any;
+  getLogin(){
+    const detail=sessionStorage.getItem('name');
+    return detail;
+    
   }
-  getLoginPersonDetail(){
-    return this.http.get(`${this.baseUrl}/loginDetails`);
+  public show=false;
+  logOut(){
+    this.show=!this.show;
+    sessionStorage.clear();
+    this.router.navigate(['/login'])
+    this.authService.logOut();
+    console.log(this.authService.logOut());
+    
+    
+
   }
+ 
 }

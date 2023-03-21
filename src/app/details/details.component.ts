@@ -74,6 +74,9 @@ export class DetailsComponent implements OnInit {
           // console.log(this.out);
           
           
+             
+          
+          
         });
 
         //  this.item=this.item.filter((obj:any )=>{'name' in obj }).map((obj:any) =>{obj.name})
@@ -82,6 +85,8 @@ export class DetailsComponent implements OnInit {
         this.formdata = this.item.find((a: any) => {
           //this.out = a;
           return a;
+
+         
         });
 
         this.formDetails.patchValue({
@@ -119,7 +124,7 @@ export class DetailsComponent implements OnInit {
             alert('something went wrong');
           },
         });
-        this.router.navigate(['/displays']);
+        this.router.navigate(['/display']);
       } else {
         this.sharedService.postDetails(values).subscribe({
           next: (value: any) => {},
@@ -127,7 +132,7 @@ export class DetailsComponent implements OnInit {
             alert('something went wrong');
           },
         });
-        this.router.navigate(['/displays']);
+        this.router.navigate(['/display']);
       }
     } else {
       alert('Please fill all the details');

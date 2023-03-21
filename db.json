@@ -31,7 +31,7 @@
       "name": "vasithra",
       "age": "21",
       "dob": "2001-04-13",
-      "address": "10,Gandhi nagar",
+      "address": "10,Gandhi ",
       "phoneNo": "9878778788",
       "location": "Chennai",
       "id": 9
@@ -57,22 +57,6 @@
       "emailId": "abi5679@gmail.com",
       "password": "Abi@123",
       "role": "Employee",
-      "id": 3
-    }
-  ],
-  "loginDetails": [
-    {
-      "emailId": "pirai3421@gmail.com",
-      "password": "pirai@345",
-      "id": 1
-    },
-    {
-      "emailId": "pirai3421@gmail.com",
-      "password": "pirai@345",
-      "id": 2
-    },
-    {
-      "userName": "Abi",
       "id": 3
     }
   ]

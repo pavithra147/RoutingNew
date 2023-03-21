@@ -46,14 +46,19 @@ export class TableComponent implements OnInit {
   }
 
   validate() {
-    this.route.params.subscribe((params) => {
-      this.collect = params;
-      //console.log(this.collect.check);
+    // this.route.params.subscribe((params) => {
+    //   this.collect = params;
+    //   //console.log(this.collect.check);
 
-      if (this.collect.check === 'Admin') {
-        this.admin = true;
-      }
-    });
+    //   if (this.collect.check === 'Admin') {
+    //     this.admin = true;
+    //   }
+    // });
+
+    const role=sessionStorage.getItem('role');
+    if(role=="Admin"){
+      this.admin=true;
+    }
   }
   public collection: any;
   filtering(data: any, title: any) {
