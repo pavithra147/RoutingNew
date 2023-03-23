@@ -35,11 +35,11 @@
     </div>
     <div class="my-2 px-5">
         <label>Phone No</label>
-        <input class="form-control" type="tel" formControlName="phoneNo" >
-        <small class="text-danger" *ngIf="formDetails.get('phoneNo')?.errors?.['pattern']">Fill the Phone number in correct format</small>
+        <input class="form-control" type="tel" formControlName="phoneno" >
+        <small class="text-danger" *ngIf="formDetails.get('phoneno')?.errors?.['pattern']">Fill the Phone number in correct format</small>
     </div>
-    <div *ngIf="formDetails.get('phoneNo')?.touched && formDetails.get('phoneNo')?.invalid" class="text-danger">
-        <small *ngIf="formDetails.get('phoneNo')?.errors?.['required']">Phone Number is required</small>
+    <div *ngIf="formDetails.get('phoneno')?.touched && formDetails.get('phoneno')?.invalid" class="text-danger">
+        <small *ngIf="formDetails.get('phoneno')?.errors?.['required']">Phone Number is required</small>
     </div>
     <div class="my-2 px-5">
         <label>Location</label>

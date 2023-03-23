@@ -5,8 +5,8 @@
       "age": "27",
       "dob": "1995-03-04",
       "address": "12,Nehru Street",
-      "phoneNo": "9879087987",
-      "location": "coimbatore",
+      "phoneno": "6789879981",
+      "location": "Coimbatore",
       "id": 2
     },
     {
@@ -14,7 +14,7 @@
       "age": "20",
       "dob": "2002-01-11",
       "address": "1,596 MGR  Nagar",
-      "phoneNo": "6789879987",
+      "phoneno": "6789879987",
       "location": "Hosur",
       "id": 6
     },
@@ -23,7 +23,7 @@
       "age": "23",
       "dob": "1999-09-17",
       "address": "New street near gate way school",
-      "phoneNo": "9087654321",
+      "phoneno": "9087654321",
       "location": "Chennai",
       "id": 8
     },
@@ -32,9 +32,18 @@
       "age": "21",
       "dob": "2001-04-13",
       "address": "10,Gandhi ",
-      "phoneNo": "9878778788",
+      "phoneno": "9878778788",
       "location": "Chennai",
       "id": 9
+    },
+    {
+      "name": "Priya",
+      "age": "23",
+      "dob": "1999-07-07",
+      "address": "6,Kamarajar Nagar",
+      "phoneno": "8987987423",
+      "location": "Madurai",
+      "id": 10
     }
   ],
   "register": [
@@ -58,6 +67,13 @@
       "password": "Abi@123",
       "role": "Employee",
       "id": 3
+    },
+    {
+      "userName": "Revathi",
+      "emailId": "rev123@gmail.com",
+      "password": "rev@123",
+      "role": "Employee",
+      "id": 4
     }
   ]
 }

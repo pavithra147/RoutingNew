@@ -1,0 +1,23 @@
+.navbar{
+    padding-right:5%;
+    background-color: black;
+}
+.nav-item2{
+    list-style: none;
+   padding-left: 5%;
+   font-size: 20px;
+   font-style: italic;
+   color:white;
+   cursor:pointer;
+}
+.nav-item1{
+    list-style: none;
+    font-size: 20px;
+    font-style: italic;
+    color:white;
+    padding-left:70%;
+}
+.nav-item{
+    font-size: 30px;
+    color:white
+}

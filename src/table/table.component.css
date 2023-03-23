@@ -11,9 +11,15 @@
 .fa-sort{
     color:grey;
 }
-.fa-arrow-up{
+.fa-arrow-up {
     color:grey;
 }
-.fa-arrow-down{
+.fa-arrow-down {
     color:grey;
 }
+/* #hover:active{
+    background-color: red;
+}
+.fas fa-arrow-down:hover{
+color:red
+} */

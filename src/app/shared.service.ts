@@ -79,11 +79,11 @@ export class SharedService {
   }
   public show=false;
   logOut(){
+    this.authService.logOut();
     this.show=!this.show;
     sessionStorage.clear();
     this.router.navigate(['/login'])
-    this.authService.logOut();
-    console.log(this.authService.logOut());
+    console.log("logout",this.authService.isLoggedIn);
     
     
 

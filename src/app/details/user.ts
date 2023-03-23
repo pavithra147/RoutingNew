@@ -5,7 +5,7 @@ export interface User{
    age:string;
    dob:number;
    address:string;
-   phoneNo:string;
+   phoneno:string;
    location:string;
 }
 
@@ -15,7 +15,7 @@ export interface UserFormGroup extends FormGroup{
         name:FormControl;
         age:FormControl;
         address:FormControl;
-        phoneNo:FormControl;
+        phoneno:FormControl;
         location:FormControl;
     }
 }

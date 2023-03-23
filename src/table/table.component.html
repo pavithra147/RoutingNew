@@ -18,16 +18,11 @@
         <tr>
           <th *ngFor="let title of head; let i = index" class="pointer"  (click)="sort(title, i)" >
             <i
-              *ngIf="item"
-              class="fas fa-arrow-up"
+              *ngIf="(collect==title)"
+              class="{{Arrowtoggle}}"
               
             ></i>
-            <i
-              *ngIf="!item"
-              class="fas fa-arrow-down"
-              
-            ></i
-            >&nbsp;{{ title }} &nbsp;&nbsp;<i
+           &nbsp;{{ title }} &nbsp;&nbsp;<i
               class="fas fa-caret-down"
               (click)="toggle()"
             ></i>
@@ -132,7 +127,7 @@
           <td>{{ item.dob }}</td>
           <td>{{ item.address }}</td>
 
-          <td>{{ item.phoneNo }}</td>
+          <td>{{ item.phoneno }}</td>
           <td>{{ item.location }}</td>
           <button (click)="deleted(item.id)">
             <i class="fas fa-trash"></i></button
@@ -173,19 +168,16 @@
         <tr>
           <th
             *ngFor="let title of headForEmployee; let i = index"
-            class="pointer"   (click)="sort(title, i )" 
+            class="pointer"    (click)="sort(title, i )"
           >
             <i
-              *ngIf="display"
-              class="fas fa-arrow-up"
-              
-            ></i>
-            <i
-              *ngIf=""
-              class="fas fa-arrow-down"
+            
+             *ngIf="(collect==title)"
+              class="{{Arrowtoggle}}"
              
-            ></i
-            >&nbsp;{{ title}} &nbsp;&nbsp;<i
+            ></i>
+          
+            &nbsp;{{ title}} &nbsp;&nbsp;<i 
               class="fas fa-caret-down"
               (click)="toggle()"
             ></i>
@@ -290,7 +282,7 @@
           <td>{{ item.dob }}</td>
           <td>{{ item.address }}</td>
 
-          <td>{{ item.phoneNo }}</td>
+          <td>{{ item.phoneno }}</td>
           <td>{{ item.location }}</td>
         </tr>
       </tbody>

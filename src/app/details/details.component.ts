@@ -34,11 +34,11 @@ export class DetailsComponent implements OnInit {
 
   form() {
     this.formDetails = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.pattern('^[A-Za-z].{5,20}')]],
+      name: ['', [Validators.required, Validators.pattern('^[A-Za-z].{4,20}')]],
       age: ['', [Validators.required, Validators.pattern('^[1-9].{1}')]],
       dob: [0, [Validators.required]],
       address: ['', [Validators.required]],
-      phoneNo: ['', [Validators.required, Validators.pattern('^[6-9].{9}')]],
+      phoneno: ['', [Validators.required, Validators.pattern('^[6-9].{9}')]],
       location: ['', [Validators.required]],
     }) as UserFormGroup;
 
@@ -94,7 +94,7 @@ export class DetailsComponent implements OnInit {
           age: this.formdata.age,
           dob: this.formdata.dob,
           address: this.formdata.address,
-          phoneNo: this.formdata.phoneNo,
+          phoneno: this.formdata.phoneno,
           location: this.formdata.location,
         });
       },
@@ -112,7 +112,7 @@ export class DetailsComponent implements OnInit {
         age: this.formDetails.get('age')?.value,
         dob: this.formDetails.get('dob')?.value,
         address: this.formDetails.get('address')?.value,
-        phoneNo: this.formDetails.get('phoneNo')?.value,
+        phoneno: this.formDetails.get('phoneno')?.value,
         location: this.formDetails.get('location')?.value,
       };
 

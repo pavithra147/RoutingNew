@@ -10,8 +10,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 const routes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
   {path:'details',component:DetailsComponent,canActivate:[AuthGuardServiceService]},
-  {path:'detail/:data',component:DetailsComponent},
-  {path:'display',component:DisplayComponent},
+  {path:'detail/:data',component:DetailsComponent,canActivate:[AuthGuardServiceService]},
+  {path:'display',component:DisplayComponent,canActivate:[LoggedinService]},
   {path:'login',component:LoginComponent},
   {path:'signUp',component:SignUpComponent}
 ]

@@ -1,5 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -33,6 +41,10 @@ export class TableComponent implements OnInit {
   public show = false;
   public collect: any;
   public admin = false;
+  public Arrowtoggle = 'fas fa-arrow-down';
+
+  @ViewChild('arrow') arrows: ElementRef | undefined;
+
   constructor(
     private sharedService: SharedService,
     private http: HttpClient,
@@ -42,7 +54,6 @@ export class TableComponent implements OnInit {
   ngOnInit() {
     this.sources();
     this.validate();
-    
   }
 
   validate() {
@@ -55,28 +66,14 @@ export class TableComponent implements OnInit {
     //   }
     // });
 
-    const role=sessionStorage.getItem('role');
-    if(role=="Admin"){
-      this.admin=true;
+    const role = sessionStorage.getItem('role');
+    if (role == 'Admin') {
+      this.admin = true;
     }
   }
   public collection: any;
   filtering(data: any, title: any) {
     title = title.toLowerCase();
-
-    // this.user=this.body.filter((el)=>{
-    //   title=title;
-    //    return el[title] == data.value.filter;
-    //   })
-    //   console.log(data.value);
-
-    // if(this.user.length==0){
-    //   return this.body=this.source;
-    // }
-
-    // else{
-    //   return this.body=this.user;
-    // }
     console.log(this.collect);
   }
 
@@ -98,28 +95,62 @@ export class TableComponent implements OnInit {
   onTableDataChange(event: any) {
     this.page = event;
   }
-  public display = true;
+  public display: any;
   public item = false;
   public indexNumber: any;
-  public click=0;
+  public arrow: any;
+  public object: any;
 
-  displayFunction=(title:any)=>{
-    console.log(title);
-  }
-  sort(title: any, index: any) {
-    title = title.toLowerCase();
-  this.indexNumber=this.head[index].toLowerCase();
-  console.log(this.indexNumber);
-  console.log(title);
+  // up(title:any,index:any){
 
-  console.log(this.display);
-  // if(title === this.indexNumber){
-  
-  //     this.display=true;
-    
+  // this.indexNumber=this.head.find((a:any)=>{
+  //   if(title==a){
+  //     return title;
+  //   }
+  // })
+  // this.collect=this.indexNumber
+  // if(this.collect == this.indexNumber){
+  //   this.Arrowtoggle='fas fa-arrow-down'
+  // }
 
   // }
-  
+
+  down(title: any, index: any) {
+    this.indexNumber = this.head.map((a: any) => {
+      if (title == a) {
+        return this.object[index];
+      }
+    });
+    console.log(this.indexNumber);
+    this.display = this.indexNumber;
+    console.log('down', this.display);
+  }
+
+  // arrowToggle(title:any,index:any){
+
+  //   this.indexNumber=this.head.map((a:any)=>{
+  //     if(title==a && (this.Arrowtoggle='fas fa-arrow-down') ){
+  //       this.Arrowtoggle='fas fa-arrow-up';
+  //       console.log(this.Arrowtoggle);
+  //     }
+  //     else{
+  //       this.Arrowtoggle='fas fa-arrow-down'
+  //       console.log(this.Arrowtoggle);
+
+  //     }
+  //   })
+
+  //}
+  sort(title: any, index: any) {
+    title = title.toLowerCase();
+
+    this.indexNumber = this.head.find((a: any) => {
+      if (title == a.toLowerCase()) {
+        return title;
+      }
+    });
+    this.collect = this.indexNumber;
+
     this.sharedService.getDetails().subscribe({
       next: (a: any) => {
         this.source = a;
@@ -129,57 +160,46 @@ export class TableComponent implements OnInit {
       },
     });
 
-    if (this.item == true) {
-      this.body = this.source.sort((a: any, b: any) => {
-        console.log(title);
-        // console.log(this.indexNumber);
-       
+    if (this.collect == this.indexNumber) {
+      if (this.item == true && this.Arrowtoggle == 'fas fa-arrow-up') {
+        this.body = this.source.sort((a: any, b: any) => {
+          // console.log(title);
 
-      //   if(title === this.indexNumber){
-  
-      //     this.display=true;
-        
-    
-      // }
+          const nameA = a[title];
+          const nameB = b[title];
 
-        const nameA = a[title];
-        const nameB = b[title];
+          if (nameA > nameB) {
+            return 1;
+          }
+          if (nameA < nameB) {
+            return -1;
+          }
+          return 0;
+        });
 
-        if (nameA > nameB) {
-          return 1;
-        }
-        if (nameA < nameB) {
-          return -1;
-        }
-        return 0;
-      });
-      // this.display=false
-      this.item = false;
-    } else {
-      this.body = this.source.sort((a: any, b: any) => {
-        const nameA = a[title];
-        const nameB = b[title];
+        this.item = false;
+        this.Arrowtoggle = 'fas fa-arrow-down';
+      } else {
+        this.body = this.source.sort((a: any, b: any) => {
+          const nameA = a[title];
+          const nameB = b[title];
 
-        if (nameA > nameB) {
-          return -1;
-        }
-        if (nameA < nameB) {
-          return 1;
-        }
+          if (nameA > nameB) {
+            return -1;
+          }
+          if (nameA < nameB) {
+            return 1;
+          }
 
-        return 0;
-      });
-      this.item = true;
-
-      //this.display=true;
+          return 0;
+        });
+        this.item = true;
+        this.Arrowtoggle = 'fas fa-arrow-up';
+      }
     }
   }
 
   toggle() {
     this.show = !this.show;
   }
-
-  // icon(index:any){
-  //  this.display=!this.display;
-  // }
 }

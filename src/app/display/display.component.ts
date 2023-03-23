@@ -20,7 +20,7 @@ export class DisplayComponent implements OnInit {
   public action = new FormControl('');
   public value!: any;
   public collect: any;
-  public detail:any
+  public detail: any;
   public headingArray = [
     'SNo',
     'Name',
@@ -52,38 +52,37 @@ export class DisplayComponent implements OnInit {
     this.location,
     this.action,
   ];
-
+   public names:any;
   constructor(
     public sharedService: SharedService,
     private router: Router,
     private route: ActivatedRoute,
-    private authService:AuthServiceService
+    private authService: AuthServiceService
   ) {}
 
   ngOnInit() {
     this.details();
     this.check();
-  
+    this.loginDetails();
    
   }
- 
-//  login(){
-//   this.router.navigate(['/login']);
-//  }
-  
- //...........................................
+
+  loginDetails() {
+    this.names = this.sharedService.getLogin();
+    console.log(this.name);
+  }
+
+  logOut() {
+    this.sharedService.logOut();
+    
+  }
+
+  //...........................................
   public admin = false;
 
   //...................
   check() {
-    // this.route.params.subscribe((params) => {
-    //   this.collect = params;
-    //   //console.log(this.collect.check);
 
-    //   if (this.collect.check === 'Admin') {
-    //     this.admin = true;
-    //   }
-    // });
     const role=sessionStorage.getItem('role');
     if(role=="Admin"){
       this.admin=true;
@@ -122,5 +121,4 @@ export class DisplayComponent implements OnInit {
 
     this.router.navigate(['/detail', data]);
   }
-
 }
