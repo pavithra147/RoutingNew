@@ -69,11 +69,25 @@
       "id": 3
     },
     {
-      "userName": "Revathi",
-      "emailId": "rev123@gmail.com",
+      "userName": "Revathi ",
+      "emailId": "rev345@gmail.com",
       "password": "rev@123",
       "role": "Employee",
+      "file": {},
       "id": 4
+    },
+    {
+      "userName": "Revathi",
+      "emailId": "rev123@gmail.com",
+      "password": "rev@345",
+      "role": "Employee",
+      "file": {},
+      "id": 5
+    }
+  ],
+  "img": [
+    {
+      "id": 1
     }
   ]
 }

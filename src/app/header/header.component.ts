@@ -9,7 +9,7 @@ import { SharedService } from '../shared.service';
 export class HeaderComponent implements OnInit {
   public name: any;
   public admin = false;
-  constructor(private sharedService: SharedService) {}
+  constructor(public sharedService: SharedService) {}
 
   ngOnInit(): void {
     this.loginDetails();

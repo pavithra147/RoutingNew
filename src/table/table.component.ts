@@ -23,7 +23,7 @@ export class TableComponent implements OnInit {
   ageNo = new FormControl('');
   dob = new FormControl();
   address = new FormControl('');
-  phoneNo = new FormControl('');
+  phoneno = new FormControl('');
   location = new FormControl('');
   @Input() headForEmployee: string[] = [];
   @Input() inputValues: any[] = [];
