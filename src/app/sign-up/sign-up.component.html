@@ -1,4 +1,4 @@
-<form  class="container p-3 my-5 border col-xs-6 col-md-4 " [formGroup]="signUpForm" (ngSubmit)="submit()">
+<form  class="container p-3 my-5 border col-xs-6 col-md-4 " [formGroup]="signUpForm" enctype="multipart/form-data" (ngSubmit)="submit()">
     <h1>SignUp Form</h1>
     <div class="form-group my-3">
         <label>Username</label>
@@ -32,7 +32,7 @@
     </div>
     <div class="form-group my-3">
         <label >Image</label>
-        <input type="file" name="files" accept="image/*" (change)="imageUpload($event)" formControlName="file"  >
+        <input type="file"  id="image" name="files" accept="image/*" (change)="imageUpload($event)"  formControlName="imageData" >
     </div>
 
     <button type="submit" class="btn btn-primary">Register</button>

@@ -13,17 +13,25 @@
     </ul>
     </div>
   
+  
     <div  *ngIf="!admin">
+     
         <ul class="navbar">
             <li class="nav-item ">
               <a class="nav-link">Employee </a>
             </li>
             <li class="nav-item1" >
-              <a class="nav-link" >Hello, {{name}}</a>
+              <a class="nav-link" >
+                <img  class="nav-brand"src="{{photo}}">  Hello, {{name}}</a>
             </li>
            
             <li class="nav-item2"   >
               <a class="nav-link" (click)="logOut()" >Logout</a>
+              
             </li>
         </ul>
-        </div>
+      
+      
+      </div>
+
+      

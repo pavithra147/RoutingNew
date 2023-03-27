@@ -8,7 +8,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { SharedService } from 'src/app/shared.service';
@@ -51,9 +51,20 @@ export class TableComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+
+ public searchForm!:FormGroup
   ngOnInit() {
     this.sources();
     this.validate();
+
+    this.searchForm=new FormGroup({
+      name: new FormControl(''),
+      age:new FormControl(''),
+      dob:new FormControl(''),
+      address:new FormControl(''),
+      phoneNo:new FormControl(''),
+      location:new FormControl('')
+    });
   }
 
   validate() {

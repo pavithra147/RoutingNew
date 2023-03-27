@@ -9,11 +9,13 @@ import { SharedService } from '../shared.service';
 export class HeaderComponent implements OnInit {
   public name: any;
   public admin = false;
+  public photo:any;
   constructor(public sharedService: SharedService) {}
 
   ngOnInit(): void {
     this.loginDetails();
     this.check();
+    this.image();
   }
 
   check() {
@@ -31,4 +33,18 @@ export class HeaderComponent implements OnInit {
   logOut() {
     this.sharedService.logOut();
   }
+
+  show=false;
+  image(){
+    this.photo= sessionStorage.getItem('img');
+    if(sessionStorage.getItem('img')!= "undefined"){
+       this.photo= sessionStorage.getItem('img');
+    }
+    else if(sessionStorage.getItem('img') == "undefined"){
+       this.photo="https://vssmn.org/wp-content/uploads/2018/12/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+    }
+
+    
+  }
+
 }

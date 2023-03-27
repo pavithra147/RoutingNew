@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
 import { SharedService } from '../shared.service';
@@ -18,6 +18,10 @@ export class DisplayComponent implements OnInit {
   public phoneNo = new FormControl('');
   public location = new FormControl('');
   public action = new FormControl('');
+
+  public searchForm!:FormGroup;
+
+  
   public value!: any;
   public collect: any;
   public detail: any;
@@ -53,28 +57,43 @@ export class DisplayComponent implements OnInit {
     this.action,
   ];
    public names:any;
+   public photo:any;
   constructor(
     public sharedService: SharedService,
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthServiceService
-  ) {}
+  ) {
+
+    // this.searchForm=new FormGroup({
+    //   name: new FormControl(),
+    //   age:new FormControl(),
+    //   dob:new FormControl(),
+    //   address:new FormControl(),
+    //   phoneNo:new FormControl(),
+    //   location:new FormControl()
+    // });
+  }
 
   ngOnInit() {
     this.details();
     this.check();
     this.loginDetails();
-   
+     this.image();
   }
 
   loginDetails() {
     this.names = this.sharedService.getLogin();
-    console.log(this.name);
+    
   }
 
   logOut() {
     this.sharedService.logOut();
     
+  }
+
+  image(){
+    this.photo= sessionStorage.getItem('img');
   }
 
   //...........................................

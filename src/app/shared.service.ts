@@ -65,8 +65,8 @@ export class SharedService {
     return this.http.get(`${this.baseUrl}/inputval`);
   }
 
-  signUpDetails(values:any){
-    return this.http.post(`${this.baseUrl}/register`,values);
+  signUpDetails(formData:any){
+    return this.http.post(`${this.baseUrl}/register`,formData);
   }
   getSignUpDetails(){
     return this.http.get(`${this.baseUrl}/register`);

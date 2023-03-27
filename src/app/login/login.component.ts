@@ -67,15 +67,13 @@ export class LoginComponent implements OnInit {
         if (emp) {
           this.authService.login();
           console.log('login', this.authService.isLoggedIn);
-
-          console.log(emp.userName);
-          console.log(emp.id);
+        console.log('img',emp.imageData);
+        
+          
           sessionStorage.setItem('name', emp.userName);
 
           sessionStorage.setItem('role', emp.role);
-          //  this.check=emp.role;
-
-          // this.router.navigate(['/display',this.check]);
+         sessionStorage.setItem('img',emp.imageData);
           this.router.navigate(['/display']);
         } else {
           alert('EmailId and Password are invalid');

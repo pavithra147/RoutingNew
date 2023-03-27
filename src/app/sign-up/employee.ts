@@ -5,8 +5,8 @@ export interface Employee{
     emailId:string,
     password:string,
     role:string,
-    file:File,
-    fileSource:string
+    imageData:string
+   
 }
 
 export interface SignUpDetailsForm extends FormGroup{
@@ -16,7 +16,6 @@ export interface SignUpDetailsForm extends FormGroup{
         emailId:FormControl,
         password:FormControl,
         role:FormControl,
-        file:FormControl,
-        fileSource:FormControl
+        imageData:FormControl
     }
 }

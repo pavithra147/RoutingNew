@@ -91,7 +91,7 @@
             />
           </td>
           <td><input type="text" id="Action" class="form-control" /></td>
-          <!-- <td *ngFor="let values of inputValues">
+           <!-- <td *ngFor="let values of inputValues">
           <input type="text"id="title" class="form-control" [formControl]="values">
           <div>
             {{values.value}}
@@ -102,14 +102,13 @@
           *ngFor="
             let item of body
               | sort
-                : [
-                    name.value,
-                    ageNo.value,
-                    dob.value,
-                    address.value,
-                    phoneno.value,
-                    location.value
-                  ]
+                : 
+                [name.value,
+                ageNo.value,
+                dob.value,
+                address.value,
+                phoneno.value,
+                location.value]
                 : ['name', 'age', 'dob', 'address', 'phoneno', 'location']
               | filter : age
               | paginate
