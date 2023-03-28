@@ -57,14 +57,50 @@ export class TableComponent implements OnInit {
     this.sources();
     this.validate();
 
-    this.searchForm=new FormGroup({
-      name: new FormControl(''),
-      age:new FormControl(''),
-      dob:new FormControl(''),
-      address:new FormControl(''),
-      phoneNo:new FormControl(''),
-      location:new FormControl('')
-    });
+    
+  }
+
+ public array:any[]=[];
+ public keys:any;
+  searchFilter(values:any,index:any,body:any){
+  // console.log("values",this.inputValues[index].value);
+   this.keys = this.body.map((obj:any) => Object.keys(obj))[0];
+// console.log(this.keys);
+
+// console.log("key",this.keys[index]);
+ 
+   
+   this.array.push(values);
+ //  console.log(this.array);
+   this.sharedService.getDetails().subscribe({
+    next: (x: any) => {this.source = x;
+    
+     
+    this.inputValues.forEach((x:any,index)=>{
+     // console.log("name",x);
+    // console.log( this.inputValues[index].value);
+      
+      if( x){
+        this.source=this.source.filter((item:any)=>{
+          console.log('thing',item[this.keys[index]]);
+       //   console.log('index',item[this.keys[index]].toString().toLowerCase().
+          //indexOf(x.toString().toLowerCase()));
+          
+          return(
+            item[this.keys[index]].toString().toLowerCase().
+            indexOf( x.toString().toLowerCase())!== -1
+          )
+        })
+      }
+    })
+   // console.log(this.source);
+    
+  return this.source},
+    error: (error: any) => {
+      alert('something went wrong');
+    },
+  });
+   
   }
 
   validate() {

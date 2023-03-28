@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from '../shared.service';
-import { User, UserFormGroup } from './user';
+import { CustomerFormGroup } from './customer';
+
 
 @Component({
   selector: 'app-details',
@@ -10,7 +11,7 @@ import { User, UserFormGroup } from './user';
   styleUrls: ['./details.component.css'],
 })
 export class DetailsComponent implements OnInit {
-  public formDetails!: UserFormGroup;
+  public formDetails!: CustomerFormGroup;
   public submit = false;
   public values: any;
   public finalOut: []=[];
@@ -40,7 +41,7 @@ export class DetailsComponent implements OnInit {
       address: ['', [Validators.required]],
       phoneno: ['', [Validators.required, Validators.pattern('^[6-9].{9}')]],
       location: ['', [Validators.required]],
-    }) as UserFormGroup;
+    }) as CustomerFormGroup;
 
     this.idFromUrl();
   }

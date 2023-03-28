@@ -1,34 +1,43 @@
-<div *ngIf="admin">
-    <ul class="navbar">
-        <li class="nav-item ">
-          <a class="nav-link">Admin </a>
-        </li>
-        <li class="nav-item1" >
-          <a class="nav-link" >Hello, {{name}}</a>
-        </li>
-       
-        <li class="nav-item2"   >
-          <a class="nav-link" (click)="logOut()" >Logout</a>
-        </li>
-    </ul>
-    </div>
+
   
+    <div  *ngIf="admin">
+     
+      <ul class="navbar">
+          <li class="nav-item ">
+            <a >Admin</a>
+          </li>
+          <li class="navitem1" >
+            <a  >
+              <img  >  Hello, {{name}} |  </a>
+          </li>
+       
+          <li class="nav-item2"   >
+            <a class="nav-link" (click)="logOut()" >Logout</a>
+            
+          </li>
+       
+      </ul>
+    
+    
+    </div>
+
   
     <div  *ngIf="!admin">
      
         <ul class="navbar">
             <li class="nav-item ">
-              <a class="nav-link">Employee </a>
+              <a >Employee </a>
             </li>
-            <li class="nav-item1" >
-              <a class="nav-link" >
-                <img  class="nav-brand"src="{{photo}}">  Hello, {{name}}</a>
+            <li class="navitem1" >
+              <a  >
+                <img  class="nav-brand"src="{{photo}}">  Hello, {{name}} |  </a>
             </li>
-           
+         
             <li class="nav-item2"   >
               <a class="nav-link" (click)="logOut()" >Logout</a>
               
             </li>
+         
         </ul>
       
       

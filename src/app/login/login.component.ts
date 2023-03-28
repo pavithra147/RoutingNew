@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { from } from 'rxjs';
 import { AuthServiceService } from '../auth-service.service';
 import { SharedService } from '../shared.service';
+import { UserFormGroup } from './user';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import { SharedService } from '../shared.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
+  loginForm!: UserFormGroup;
   check = false;
   wrappedPromise1$: any;
   id!: number;
@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       emailId: ['', [Validators.required]],
       password: ['', [Validators.required]],
-    });
+    })as UserFormGroup;
   }
   submit() {
     this.sharedService.getSignUpDetails().subscribe({
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
         if (emp) {
           this.authService.login();
           console.log('login', this.authService.isLoggedIn);
-        console.log('img',emp.imageData);
+      
         
           
           sessionStorage.setItem('name', emp.userName);

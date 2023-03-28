@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
        this.photo= sessionStorage.getItem('img');
     }
     else if(sessionStorage.getItem('img') == "undefined"){
-       this.photo="https://vssmn.org/wp-content/uploads/2018/12/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+       this.photo="assets/profile icon.png"
     }
 
     

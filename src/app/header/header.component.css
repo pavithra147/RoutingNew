@@ -1,24 +1,23 @@
 .navbar{
-    padding-right:5%;
+    padding-right:1%;
     background-color: black;
    
 }
 .nav-item2{
     list-style: none;
-   /* padding-left: 5%; */
+ 
    font-size: 20px;
    font-style: italic;
    color:white;
    cursor:pointer;
-   padding:0 0 0 0
 }
-.nav-item1{
+.navitem1{
     list-style: none;
     font-size: 20px;
     font-style: italic;
     color:white;
-    
-   padding:0 0 0 572px
+    margin-left:auto;
+    cursor: pointer;
 }
 .nav-item{
     font-size: 30px;
@@ -26,6 +25,10 @@
 }
 .nav-brand{
     width:40px;
-    border-radius:45%;
-    object-fit: cover;
+    height:40px;
+    border-radius:50%;
+    
+    /* object-fit: cover; */
 }
+
+

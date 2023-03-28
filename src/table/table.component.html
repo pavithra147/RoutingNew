@@ -40,8 +40,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngIf="show">
-          <td><input type="text" id="s.no" class="form-control" /></td>
+         <tr *ngIf="show">
+         <!-- <td><input type="text" id="s.no" class="form-control" /></td>
           <td>
             <input
               type="text"
@@ -89,14 +89,14 @@
               class="form-control"
               [formControl]="location"
             />
-          </td>
-          <td><input type="text" id="Action" class="form-control" /></td>
-           <!-- <td *ngFor="let values of inputValues">
-          <input type="text"id="title" class="form-control" [formControl]="values">
+          </td> 
+          <td><input type="text" id="Action" class="form-control" /></td>-->
+           <td *ngFor="let values of inputValues; let i = index">
+          <input type="text"id="title" class="form-control" (ngModelChange)="searchFilter(values.value,i-1,(body))" [formControl]="values">
           <div>
             {{values.value}}
           </div>
-        </td> -->
+        </td>
         </tr>
         <tr
           *ngFor="
