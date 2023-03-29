@@ -17,6 +17,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HeaderComponent } from './header/header.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
  @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import { HeaderComponent } from './header/header.component';
     SortPipe,
     LoginComponent,
     SignUpComponent,
-    HeaderComponent
+    HeaderComponent,
+    DashboardComponent
    
   ],
   imports: [
