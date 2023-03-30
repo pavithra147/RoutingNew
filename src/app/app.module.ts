@@ -18,6 +18,9 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {ChartsModule} from 'ng2-charts'
+
+
  @NgModule({
   declarations: [
     AppComponent,
@@ -40,8 +43,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BrowserAnimationsModule,
    NgxPaginationModule,
    FormsModule,
-   Ng2SearchPipeModule
-  
+   Ng2SearchPipeModule,
+   ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

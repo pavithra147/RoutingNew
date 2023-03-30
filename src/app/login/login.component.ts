@@ -75,7 +75,8 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('role', emp.role);
          sessionStorage.setItem('img',emp.imageData);
           this.router.navigate(['/display']);
-        } else {
+        } 
+       else {
           alert('EmailId and Password are invalid');
         }
       },

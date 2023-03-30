@@ -44,6 +44,15 @@
       "phoneno": "8987987423",
       "location": "Madurai",
       "id": 10
+    },
+    {
+      "name": "Vicky",
+      "age": "20",
+      "dob": "2000-09-04",
+      "address": "2,Thiruvalluvar street",
+      "phoneno": "9876766766",
+      "location": "Chennai",
+      "id": 11
     }
   ],
   "register": [

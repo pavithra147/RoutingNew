@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardServiceService } from './auth-guard-service.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailsComponent } from './details/details.component';
 import { DisplayComponent } from './display/display.component';
 import { LoggedinService } from './loggedin.service';
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path:'detail/:data',component:DetailsComponent,canActivate:[AuthGuardServiceService]},
   {path:'display',component:DisplayComponent,canActivate:[LoggedinService]},
   {path:'login',component:LoginComponent},
-  {path:'signUp',component:SignUpComponent}
+  {path:'signUp',component:SignUpComponent},
+  {path:'dashboard',component:DashboardComponent}
 ]
 
 
