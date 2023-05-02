@@ -11,6 +11,10 @@ import { UserFormGroup } from './user';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  token:any;
+  name!:string;
+  role!:string;
+  image!:string;
   loginForm!: UserFormGroup;
   check = false;
   wrappedPromise1$: any;
@@ -56,33 +60,58 @@ export class LoginComponent implements OnInit {
     })as UserFormGroup;
   }
   submit() {
-    this.sharedService.getSignUpDetails().subscribe({
-      next: (x: any) => {
-        const emp = x.find((a: any) => {
-          return (
-            a.emailId === this.loginForm.value.emailId &&
-            a.password === this.loginForm.value.password
-          );
-        });
-        if (emp) {
-          this.authService.login();
-          console.log('login', this.authService.isLoggedIn);
+      let values={
+        emailId:this.loginForm.get('emailId')?.value,
+        password:this.loginForm.get('password')?.value
+      }
+      this.sharedService.postLoginDetails(values).subscribe({
+        next:(res:any)=>{
+          console.log(res)
+          this.token=res.token;
+          localStorage.setItem('token',this.token);
+          this.name=res.data;
+          this.role=res.role;
+          this.image=res.image;
+         
+          sessionStorage.setItem('name',this.name);
+          sessionStorage.setItem('role',this.role);
+          sessionStorage.setItem('image',this.image);
+          this.router.navigate(['/display'])
+         
+        },
+        error: (e) => {
+               alert('EmailId and Password are Invalid');
+             }
+      })
+      this.loginForm.reset()
+    // this.sharedService.getSignUpDetails().subscribe({
+    //   next: (x: any) => {
+    //     const emp = x.find((a: any) => {
+    //       return (
+    //         a.emailId === this.loginForm.value.emailId &&
+    //         a.password === this.loginForm.value.password
+    //       );
+    //     });
+    //     if (emp) {
+    //       this.authService.login();
+    //       console.log('login', this.authService.isLoggedIn);
       
         
           
-          sessionStorage.setItem('name', emp.userName);
+    //       sessionStorage.setItem('name', emp.userName);
 
-          sessionStorage.setItem('role', emp.role);
-         sessionStorage.setItem('img',emp.imageData);
-          this.router.navigate(['/display']);
-        } 
-       else {
-          alert('EmailId and Password are invalid');
-        }
-      },
-      error: (e) => {
-        alert('something went wrong');
-      },
-    });
+    //       sessionStorage.setItem('role', emp.role);
+    //      sessionStorage.setItem('img',emp.imageData);
+    //       this.router.navigate(['/display']);
+    //     } 
+    //    else {
+    //       alert('EmailId and Password are invalid');
+    //     }
+    //   },
+    //   error: (e) => {
+    //     alert('something went wrong');
+    //   },
+    // });
   }
-}
+    
+  }

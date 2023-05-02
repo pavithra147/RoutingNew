@@ -10,6 +10,7 @@ import { AuthServiceService } from './auth-service.service';
   providedIn: 'root',
 })
 export class SharedService {
+  token:any;
   public baseUrl=environment.apiUrl;
   public title=environment.title;
   private subject: BehaviorSubject<string>;
@@ -55,6 +56,9 @@ export class SharedService {
   getDetails() {
     return this.http.get(`${this.baseUrl}/details`);
   }
+  postLoginDetails(details:any){
+    return this.http.post(`${this.baseUrl}/login`,details)
+  }
   detailsToEdit(val: any) {
     return this.http.get(`${this.baseUrl}/details`, val);
   }
@@ -84,7 +88,7 @@ export class SharedService {
     sessionStorage.clear();
     this.router.navigate(['/login'])
     console.log("logout",this.authService.isLoggedIn);
-    
+    localStorage.removeItem('token');
     
 
   }

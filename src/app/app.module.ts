@@ -7,8 +7,8 @@ import { DetailsComponent } from './details/details.component';
 import { DisplayComponent } from './display/display.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TableComponent } from '../table/table.component';
-import { HttpClientModule } from '@angular/common/http';
+import { TableComponent } from './table/table.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -18,7 +18,10 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import {ChartsModule} from 'ng2-charts'
+import {ChartsModule} from 'ng2-charts';
+import { PiechartComponent } from './piechart/piechart.component'
+import { AuthInterceptor } from './interceptors/authInterceptors';
+import { SendHeaderComponent } from './send-header/send-header.component';
 
 
  @NgModule({
@@ -31,7 +34,9 @@ import {ChartsModule} from 'ng2-charts'
     LoginComponent,
     SignUpComponent,
     HeaderComponent,
-    DashboardComponent
+    DashboardComponent,
+    PiechartComponent,
+    SendHeaderComponent
    
   ],
   imports: [
@@ -46,7 +51,11 @@ import {ChartsModule} from 'ng2-charts'
    Ng2SearchPipeModule,
    ChartsModule
   ],
-  providers: [],
+  providers: [  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

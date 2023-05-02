@@ -36,11 +36,11 @@ export class HeaderComponent implements OnInit {
 
   show=false;
   image(){
-    this.photo= sessionStorage.getItem('img');
-    if(sessionStorage.getItem('img')!= "undefined"){
-       this.photo= sessionStorage.getItem('img');
+    this.photo= sessionStorage.getItem('image');
+    if(sessionStorage.getItem('image')!= "undefined"){
+       this.photo= sessionStorage.getItem('image');
     }
-    else if(sessionStorage.getItem('img') == "undefined"){
+    else if(sessionStorage.getItem('image') == "undefined"){
        this.photo="assets/profile icon.png"
     }
 

@@ -61,7 +61,9 @@ img:any;
     reader.onload=()=>{ 
       this.signUpForm.patchValue({
         imageData:reader.result
+     
       })
+      
     }
   
    

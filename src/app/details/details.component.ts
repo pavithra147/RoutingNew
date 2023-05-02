@@ -61,18 +61,11 @@ export class DetailsComponent implements OnInit {
       next: (b: any) => {
         this.item = b;
         this.item = this.item.map((a: any) => {
-          if (a.id == this.num) {
+          if (a._id == this.num) {
             return a;
           }
 
-          this.item=[{a:10},{b:20}]
-          this.finalOut=this.item.map((a:any)=>{
-            this.out=a
-            
-            return a;
-          })
-          // console.log(this.finalOut);
-          // console.log(this.out);
+         
           
           
              
