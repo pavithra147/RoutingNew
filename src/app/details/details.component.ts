@@ -69,12 +69,9 @@ export class DetailsComponent implements OnInit {
           
           
              
-          
+        
           
         });
-
-        //  this.item=this.item.filter((obj:any )=>{'name' in obj }).map((obj:any) =>{obj.name})
-        //  console.log(this.item);
 
         this.formdata = this.item.find((a: any) => {
           //this.out = a;

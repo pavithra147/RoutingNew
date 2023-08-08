@@ -1,0 +1,17 @@
+<div>
+<nav class="side">
+  <div class="my-3">
+    <h1>Messages</h1></div>
+    <div *ngFor="let user of registerDetail" class="my-3 row" (click)="userChat(user)">
+      <div class="image"><img src="{{user.imageData}}"></div>
+      <div class="name">{{user.userName}}</div>
+    </div>
+    
+  </nav>
+  <div *ngIf="show" class="show">
+    <h1>Chats</h1>
+  </div>
+<div *ngIf="display" class="display">
+  <app-message  (messageContentChange)="messageContentChange($event)"[sender]="senderMessage" [receiver]="receiverMessage" [userName]="userName" [image]="image" [message]="message" [selectedId]="select" (oldMessage)="oldMessages" (sendMessage)="sendMessage($event)" ></app-message>
+</div>
+</div>

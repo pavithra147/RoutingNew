@@ -29,30 +29,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form();
-    this.details();
-    //this.login()
+  
   }
-  details() {
-    this.sharedService.getDetails().subscribe({
-      next: (x: any) => {
-        this.value = x;
-      },
-      error: (error: any) => {
-        alert('something went wrong');
-      },
-    });
-  }
-
-  login() {
-    if (this.authService.login() == true) {
-      this.router.navigate(['/display']);
-    } else if (this.authService.login() == false) {
-      this.router.navigate(['/login']);
-    } else {
-      this.router.navigate(['/login']);
-    }
-  }
-
+ 
+ 
   form() {
     this.loginForm = this.fb.group({
       emailId: ['', [Validators.required]],
@@ -72,7 +52,7 @@ export class LoginComponent implements OnInit {
           this.name=res.data;
           this.role=res.role;
           this.image=res.image;
-         
+          sessionStorage.setItem('userId',res.id);
           sessionStorage.setItem('name',this.name);
           sessionStorage.setItem('role',this.role);
           sessionStorage.setItem('image',this.image);

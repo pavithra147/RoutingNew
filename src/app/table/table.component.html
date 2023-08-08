@@ -18,7 +18,7 @@
         <tr>
           <th *ngFor="let title of head; let i = index" class="pointer"  (click)="sort(title, i)" >
             <i
-              *ngIf="(collect==title)"
+              *ngIf="(collect===title)"
               class="{{Arrowtoggle}}"
               
             ></i>
@@ -120,7 +120,7 @@
             let i = index
           "
         >
-          <td>{{ i + 1 }}</td>
+          <td>{{i+1}}</td>
           <td>{{ item.name }}</td>
           <td>{{ item.age }}</td>
           <td>{{ item.dob }}</td>
@@ -128,6 +128,10 @@
 
           <td>{{ item.phoneno }}</td>
           <td>{{ item.location }}</td>
+           <button><span class="material-symbols-outlined" (click)="sendCount(item._id)">
+            favorite
+            </span></button> 
+            <h2>likes: {{likeValue}}</h2>
           <button (click)="deleted(item._id)">
             <i class="fas fa-trash"></i></button
           >&nbsp;
@@ -171,7 +175,7 @@
           >
             <i
             
-             *ngIf="(collect==title)"
+             *ngIf="(collect===title)"
               class="{{Arrowtoggle}}"
              
             ></i>

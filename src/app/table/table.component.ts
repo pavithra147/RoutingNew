@@ -12,6 +12,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { SharedService } from 'src/app/shared.service';
+import { LikeService } from '../service/like.service';
 
 @Component({
   selector: 'app-table',
@@ -19,6 +20,7 @@ import { SharedService } from 'src/app/shared.service';
   styleUrls: ['./table.component.css'],
 })
 export class TableComponent implements OnInit {
+[x: string]: any;
   name = new FormControl('');
   ageNo = new FormControl('');
   dob = new FormControl();
@@ -35,6 +37,7 @@ export class TableComponent implements OnInit {
   public filter!: string;
   @Output() delete = new EventEmitter<string>();
   @Output() edit = new EventEmitter<string>();
+  @Output() like = new EventEmitter<number>();
   public source!: any;
   public user: any;
   public age: any;
@@ -42,13 +45,16 @@ export class TableComponent implements OnInit {
   public collect: any;
   public admin = false;
   public Arrowtoggle = 'fas fa-arrow-down';
-
+  public counts=0;
+  public likesCount:any[]=[]
+  public likeValue!:number
   @ViewChild('arrow') arrows: ElementRef | undefined;
 
   constructor(
     private sharedService: SharedService,
     private http: HttpClient,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private likeService:LikeService
   ) {}
 
 
@@ -56,8 +62,22 @@ export class TableComponent implements OnInit {
   ngOnInit() {
     this.sources();
     this.validate();
-
-    
+    this.likeService.connectSocket();
+    this.likeService.getCount().subscribe((count:any)=>{
+      console.log(count);
+      
+      this.likeValue=count
+       console.log(this.likeValue);
+//        localStorage.setItem('like', JSON.stringify(this.likeValue));
+//        const storedLikeValue = localStorage.getItem('like');
+// if (storedLikeValue) {
+  
+  
+//   this.likeValue = parseInt(storedLikeValue, 10); 
+// } else {
+//   this.likeValue = 0; 
+// }
+    })
   }
 
  public array:any[]=[];
@@ -221,5 +241,25 @@ export class TableComponent implements OnInit {
 
   toggle() {
     this.show = !this.show;
+  }
+
+  sendCount(item:any){
+   this.count= ++this.count;
+   this.likeService.sendCount(this.count,item)
+   this.likeService.getCount().subscribe({
+    next:(data:any)=>{
+this.likeValue=data
+console.log(this.likeValue);
+
+// localStorage.setItem('like',JSON.stringify(this.likeValue))
+// const storedLikeValue = localStorage.getItem('like');
+// if (storedLikeValue) {
+//   this.likeValue = parseInt(storedLikeValue, 10); 
+//   this.like.emit(this.likeValue)
+// } else {
+//   this.likeValue = 0; 
+// }
+    }
+   });
   }
 }

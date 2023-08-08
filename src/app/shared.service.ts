@@ -46,9 +46,9 @@ export class SharedService {
     
     this.index = data;
   }
-  delete(item: any) {
+  delete(_id: any) {
     
-    return this.http.delete(`${this.baseUrl}/details/${item}`);
+    return this.http.delete(`${this.baseUrl}/details/${_id}`);
   }
   postDetails(form: any) {
     return this.http.post(`${this.baseUrl}/details`, form);
@@ -80,6 +80,9 @@ export class SharedService {
     const detail=sessionStorage.getItem('name');
     return detail;
     
+  }
+  registerDetailExceptUserId(id: any){
+    return this.http.get(`${this.baseUrl}/signUp/${id}`)
   }
   public show=false;
   logOut(){

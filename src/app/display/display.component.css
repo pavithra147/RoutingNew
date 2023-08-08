@@ -29,4 +29,6 @@ li{
     color:white;
     cursor:pointer;
 }
-
+.material-symbols-outlined{
+    cursor: pointer;
+}

@@ -7,6 +7,8 @@ import { DisplayComponent } from './display/display.component';
 import { LoggedinService } from './loggedin.service';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { ChatComponentComponent } from './chat-component/chat-component.component';
+import { MessageComponent } from './message/message.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'/login',pathMatch:'full'},
@@ -15,7 +17,9 @@ const routes: Routes = [
   {path:'display',component:DisplayComponent,canActivate:[LoggedinService]},
   {path:'login',component:LoginComponent},
   {path:'signUp',component:SignUpComponent},
-  {path:'dashboard',component:DashboardComponent}
+  {path:'dashboard',component:DashboardComponent},
+  {path:'chat',component: ChatComponentComponent},
+  {path:'message',component: MessageComponent}
 ]
 
 

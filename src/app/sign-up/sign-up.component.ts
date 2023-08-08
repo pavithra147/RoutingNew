@@ -34,7 +34,7 @@ img:any;
     this.sharedService.getSignUpDetails().subscribe((c)=>{
       this.formData=c;
      this.formData=this.formData.map((a:any)=>{
-      //console.log(a);
+      console.log(this.formData);
    this.selectedFile=a;
         return a
      })

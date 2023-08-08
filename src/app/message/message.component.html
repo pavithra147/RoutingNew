@@ -1,0 +1,24 @@
+<div class="box-container">
+    <div class="name">
+        <img class="image"src="{{image}}">
+        <h2>{{userName}}</h2>
+    </div>
+    <div class="msg">
+    <div  *ngFor="let msg of sender">
+        {{sender|json}}
+        <p>sender:{{msg }}</p>
+       
+        <!-- <p>{{msg |json}}</p> -->
+   </div>
+   <div  *ngFor="let msg of receiver">
+    <p>receiver:{{msg}}</p>
+</div>
+</div>
+   <div class="input">
+    <input class="form-control "[(ngModel)]="messageContent" placeholder="Type your message">
+      <button class="btn btn-primary" (click)="send()" >Send</button>
+    </div>
+</div>
+
+
+ 

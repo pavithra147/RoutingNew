@@ -22,6 +22,8 @@ import {ChartsModule} from 'ng2-charts';
 import { PiechartComponent } from './piechart/piechart.component'
 import { AuthInterceptor } from './interceptors/authInterceptors';
 import { SendHeaderComponent } from './send-header/send-header.component';
+import { ChatComponentComponent } from './chat-component/chat-component.component';
+import { MessageComponent } from './message/message.component';
 
 
  @NgModule({
@@ -36,7 +38,9 @@ import { SendHeaderComponent } from './send-header/send-header.component';
     HeaderComponent,
     DashboardComponent,
     PiechartComponent,
-    SendHeaderComponent
+    SendHeaderComponent,
+    ChatComponentComponent,
+    MessageComponent
    
   ],
   imports: [

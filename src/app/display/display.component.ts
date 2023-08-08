@@ -112,6 +112,9 @@ export class DisplayComponent implements OnInit {
     this.sharedService.getDetails().subscribe({
       next: (x: any) => {
         this.value = x;
+        console.log(this.value);
+        
+        
       },
       error: (error: any) => {
         alert('something went wrong');
@@ -119,8 +122,10 @@ export class DisplayComponent implements OnInit {
     });
   }
   delete(id: any) {
+    console.log(id);
+    
     this.sharedService.delete(id).subscribe({
-      next: (x: any) => {
+     next: (x: any) => {
         this.details();
       },
       error: (error: any) => {
@@ -136,8 +141,8 @@ export class DisplayComponent implements OnInit {
   // this.details();
 
   edit(data: any) {
+    console.log(data);
     this.sharedService.edit(data);
-
     this.router.navigate(['/detail', data]);
   }
 }
